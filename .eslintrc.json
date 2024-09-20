@@ -1,9 +1,13 @@
-
 {
-  "extends":  ["next/core-web-vitals", "next/typescript"],
+  "extends": "next",
   "rules": {
     "react/no-unescaped-entities": "off",
-    "@next/next/no-page-custom-font": "off"
+    "@next/next/no-page-custom-font": "off",
+    "quotemark": [true, "single"],
+    "no-console": [true, "log", "error"],
+    "max-line-length": [true, 120],
+    "no-unused-variable": false,
+    "semicolon": [true, "always"]
   }
 }
 
