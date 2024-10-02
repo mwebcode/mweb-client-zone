@@ -7,14 +7,6 @@ import {columns, IPayment} from "./columns"
 import {DataTable} from "./data-table"
 import MwebSliceContainer from "@/components/MwebSliceContainer";
 
-type Payment = {
-    status: string | undefined,
-    accountId: string,
-    name: string,
-    emailAddress: string,
-    username: string
-    createDate: string
-}
 const date = new Date();
 const options = { year: 'numeric', month: 'short', day: 'numeric' };
 
@@ -34,16 +26,13 @@ function getSelfAsUser(): CorporateUser | null {
             masterAccountStatus: customerAccount.status?.toUpperCase(),
             title: ''
         };
-
-        console.log('selfUser::', selfUser)
-
         return selfUser;
     } else {
         return null;
     }
 }
-const selfUser = getSelfAsUser();
-export const payments: IPayment[] = [
+const selfUser: any = getSelfAsUser();
+ const payments: IPayment[] = [
     {
         status:  selfUser?.masterAccountStatus.charAt(0).toUpperCase() + selfUser?.masterAccountStatus.slice(1).toLowerCase(),
         accountId: selfUser?.accountId,
@@ -55,13 +44,12 @@ export const payments: IPayment[] = [
 ]
 
 async function getData(): Promise<IPayment[]> {
-    // Fetch data from your API here.
     return payments;
 }
 
 export default async function DemoPage() {
-    const data = await getData()
-    getSelfAsUser()
+    const data = await getData();
+    getSelfAsUser();
 
     return (
         <MwebSliceContainer
