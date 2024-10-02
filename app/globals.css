@@ -183,6 +183,7 @@ body {
   display: none;
 }
 
+
 /* Show the checkmark when checked */
 .custom-checkbox input:checked + .checkmark::after {
   display: block;
