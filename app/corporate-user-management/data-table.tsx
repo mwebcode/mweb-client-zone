@@ -38,8 +38,38 @@ export function DataTable<TData, TValue>({
         []
     );
     const [globalFilter, setGlobalFilter] = useState<any>([])
+    interface ColumnFilter {
+        id: string
+        value: unknown
+    }
+
+    const [filters, setFilters] = useState(({
+        Active: true,
+        Inactive: true,
+        Suspended: true,
+    })) as any
+    // Handle checkbox changes
+    const handleCheckboxChange = (e:any) => {
+        const { name, checked } = e.target;
+        setFilters({
+            ...filters,
+            [name]: checked,
+        });
+    };
+    type ColumnFiltersState = ColumnFilter[];
+
+    // // Filter data based on selected statuses
+    // const filteredData = data.filter((row) =>
+    //     filters[row.status]
+    // );
+    const filteredData = useMemo(() => {
+        return data.filter((row:any) =>
+            filters[row.status]
+        );
+    }, [data, filters]);  // Recalculate only when data or filters change
+
     const table = useReactTable({
-        data,
+        data: filteredData,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
@@ -53,6 +83,27 @@ export function DataTable<TData, TValue>({
         },
 
     });
+    console.log(table.getState().columnFilters)
+    const [searchTerm, setSearchTerm] = useState("");
+    const handleSearchChange = (event:any) => {
+        const value = event.target.value;
+        setSearchTerm(value);
+
+        // Update filter for multiple columns
+        table.setGlobalFilter(value);
+    };
+    const Checkbox = ({ label, name, checked, onChange }: any) => (
+        <label className="custom-checkbox flex">
+            <input
+                type="checkbox"
+                name={name}
+                checked={checked}
+                onChange={onChange}
+            />
+            <span className="checkmark"></span>
+            {label}
+        </label>
+    );
     return (
         <div className='w-[1024px] items-center'>
             <div className="flex items-center py-4">
@@ -71,7 +122,57 @@ export function DataTable<TData, TValue>({
               </div>
             </div>
             <div className='mb-6 text-sm'> Search by any column information type</div>
-        <div className="rounded-md border">
+
+            <div className='mb-8 gap-10 flex'>
+                <Checkbox
+                    label="Active"
+                    name='Active'
+                    checked={filters.Active}
+                    onChange={handleCheckboxChange}
+                />
+                <Checkbox
+                    label="Inactive"
+                    name='Inactive'
+                    checked={filters.Inactive}
+                    onChange={handleCheckboxChange}
+                />
+                <Checkbox
+                    label="Suspended"
+                    name='Suspended'
+                    checked={filters.Suspended}
+                    onChange={handleCheckboxChange}
+                />
+                {/*<label className='p-3 flex gap-2 custom-checkbox'>*/}
+                {/*    <input*/}
+                {/*        type="checkbox"*/}
+                {/*        name="Active"*/}
+                {/*        checked={filters.Active}*/}
+                {/*        onChange={handleCheckboxChange}*/}
+                {/*    />*/}
+                {/*   <span className=''> Active</span>*/}
+                {/*</label>*/}
+                {/*<label className='p-3 flex gap-2 custom-checkbox'>*/}
+                {/*    <input*/}
+                {/*        type="checkbox"*/}
+                {/*        name="Inactive"*/}
+                {/*        checked={filters.Inactive}*/}
+                {/*        onChange={handleCheckboxChange}*/}
+                {/*    />*/}
+                {/*  <span className='checkmark'>Inactive</span>*/}
+                {/*</label>*/}
+                {/*<label className='p-3 flex gap-2 custom-checkbox'>*/}
+                {/*    <input*/}
+                {/*        type="checkbox"*/}
+                {/*        name="Suspended"*/}
+                {/*        checked={filters.Suspended}*/}
+                {/*        onChange={handleCheckboxChange}*/}
+                {/*    />*/}
+                {/*   <span className='checkmark'>Suspended</span>*/}
+                {/*</label>*/}
+            </div>
+
+
+            <div className="rounded-md border">
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
@@ -135,7 +236,5 @@ export function DataTable<TData, TValue>({
                 </Button>
             </div>
         </div>
-
-
     )
 }
