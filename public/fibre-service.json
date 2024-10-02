@@ -1,0 +1,202 @@
+{
+  "serviceTypeId": 564,
+  "username": "53983050",
+  "serviceIdentifier": "53983050",
+  "info": [
+    {
+      "id": 564000,
+      "displayGroup": null,
+      "displayOrder": 1,
+      "name": "Network Provider",
+      "description": "The name of the Fibre network provider",
+      "value": "Vumatel",
+      "insertValue": "100"
+    },
+    {
+      "id": 564006,
+      "displayGroup": null,
+      "displayOrder": 2,
+      "name": "Network Provider Identifier",
+      "description": "Identifies the customer with the Fibre network provider",
+      "value": "VT-LDK-OB-3028",
+      "insertValue": "VT-LDK-OB-3028"
+    },
+    {
+      "id": -564001,
+      "displayGroup": null,
+      "displayOrder": 4,
+      "name": "Download Speed",
+      "description": "Download speed",
+      "value": "200 Mbps",
+      "insertValue": "200 Mbps"
+    },
+    {
+      "id": -564001,
+      "displayOrder": 4,
+      "name": "Upload Speed",
+      "description": "Upload speed",
+      "value": "200 Mbps",
+      "insertValue": "200 Mbps"
+    }
+  ],
+  "groups": [
+    {
+      "displayGroup": "Access Details",
+      "displayOrder": 6,
+      "settings": [
+        {
+          "serviceTypeParameterId": 564003,
+          "name": "Password",
+          "description": "Password to enter into your Fibre router",
+          "value": "6ocBQGSJKzY765pAHUVNxA==_MAE062012",
+          "displayValue": "******",
+          "selected": false,
+          "dataType": "PASSWORD",
+          "inputType": "PASSWORD",
+          "mandatory": true,
+          "displayGroup": "Access Details",
+          "displayOrder": 6,
+          "validationPatterns": null,
+          "options": [],
+          "originalValue": "6ocBQGSJKzY765pAHUVNxA==_MAE062012",
+          "wasTouched": true,
+          "fieldName": "password-password-564003"
+        }
+      ],
+      "isDisplayGroupValid": false
+    },
+    {
+      "displayGroup": "General",
+      "displayOrder": 19,
+      "settings": [
+        {
+          "serviceTypeParameterId": 564018,
+          "name": "On-Site Contact Full Name",
+          "description": "On-Site Contact Full Name",
+          "value": "MR GARY RIFFEL",
+          "displayValue": "MR GARY RIFFEL",
+          "selected": false,
+          "dataType": "TEXT",
+          "inputType": "TEXT",
+          "mandatory": false,
+          "displayGroup": "General",
+          "displayOrder": 19,
+          "validationPatterns": null,
+          "options": [],
+          "originalValue": "MR GARY RIFFEL",
+          "wasTouched": false,
+          "fieldName": "text-on-site-contact-full-name-564018"
+        },
+        {
+          "serviceTypeParameterId": 564019,
+          "name": "On-site Contact Mobile Number",
+          "description": "On-site Contact Mobile Number",
+          "value": "0832737363",
+          "displayValue": "0832737363",
+          "selected": false,
+          "dataType": "TEXT",
+          "inputType": "TEXT",
+          "mandatory": false,
+          "displayGroup": "General",
+          "displayOrder": 20,
+          "validationPatterns": null,
+          "options": [],
+          "originalValue": "0832737363",
+          "wasTouched": false,
+          "fieldName": "text-on-site-contact-mobile-number-564019"
+        },
+        {
+          "serviceTypeParameterId": 564020,
+          "name": "On-Site Contact Email Address",
+          "description": "The email address of the On-Site Contact",
+          "value": "",
+          "displayValue": "",
+          "selected": false,
+          "dataType": "TEXT",
+          "inputType": "TEXT",
+          "mandatory": false,
+          "displayGroup": "General",
+          "displayOrder": 21,
+          "validationPatterns": null,
+          "options": [],
+          "originalValue": "",
+          "wasTouched": false,
+          "fieldName": "text-on-site-contact-email-address-564020"
+        },
+        {
+          "serviceTypeParameterId": 564021,
+          "name": "On-Site Contact Telephone Number",
+          "description": "The telephone number of the On-Site Contact",
+          "value": "",
+          "displayValue": "",
+          "selected": false,
+          "dataType": "TEXT",
+          "inputType": "TEXT",
+          "mandatory": false,
+          "displayGroup": "General",
+          "displayOrder": 22,
+          "validationPatterns": null,
+          "options": [],
+          "originalValue": "",
+          "wasTouched": false,
+          "fieldName": "text-on-site-contact-telephone-number-564021"
+        },
+        {
+          "serviceTypeParameterId": 564022,
+          "name": "Property Owner",
+          "description": "Indicates whether the customer placing the order is the property owner",
+          "value": 0,
+          "displayValue": "",
+          "selected": false,
+          "dataType": "NUMBER",
+          "inputType": "LIST",
+          "mandatory": false,
+          "displayGroup": "General",
+          "displayOrder": 23,
+          "validationPatterns": null,
+          "options": [
+            {
+              "key": "Yes",
+              "value": 1
+            },
+            {
+              "key": "No",
+              "value": 2
+            }
+          ],
+          "originalValue": 0,
+          "wasTouched": false,
+          "fieldName": "list-property-owner-564022"
+        },
+        {
+          "serviceTypeParameterId": 564026,
+          "name": "Second Line Installation",
+          "description": "Second Line Installation",
+          "value": "",
+          "displayValue": "",
+          "selected": false,
+          "dataType": "NUMBER",
+          "inputType": "RADIOBUTTON",
+          "mandatory": false,
+          "displayGroup": "General",
+          "displayOrder": 27,
+          "validationPatterns": null,
+          "options": [
+            {
+              "key": "No",
+              "value": "1"
+            },
+            {
+              "key": "Yes",
+              "value": "2"
+            }
+          ],
+          "originalValue": "",
+          "wasTouched": false,
+          "fieldName": "radiobutton-second-line-installation-564026"
+        }
+      ],
+      "isDisplayGroupValid": false
+    }
+  ]
+}

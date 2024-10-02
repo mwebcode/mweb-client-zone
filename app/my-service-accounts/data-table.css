@@ -1,0 +1,22 @@
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fb;
+  }
+
+.service-account-title {
+    /* font-weight: bold;  */
+    font-size: 1.25rem; 
+    margin-right: 1rem; 
+}
+.caption {
+    margin-top: 0.0rem; 
+    font-size: 0.875rem; 
+    color: #6b7280;
+    text-align: center; 
+    padding-top: 2px;
+  }
+  
+  
