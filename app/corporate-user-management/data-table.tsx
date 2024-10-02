@@ -47,9 +47,9 @@ export function DataTable<TData, TValue>({
         Active: true,
         Inactive: true,
         Suspended: true,
-    }))
+    })) as any
     // Handle checkbox changes
-    const handleCheckboxChange = (e) => {
+    const handleCheckboxChange = (e:any) => {
         const { name, checked } = e.target;
         setFilters({
             ...filters,
@@ -63,7 +63,7 @@ export function DataTable<TData, TValue>({
     //     filters[row.status]
     // );
     const filteredData = useMemo(() => {
-        return data.filter((row) =>
+        return data.filter((row:any) =>
             filters[row.status]
         );
     }, [data, filters]);  // Recalculate only when data or filters change
@@ -85,14 +85,14 @@ export function DataTable<TData, TValue>({
     });
     console.log(table.getState().columnFilters)
     const [searchTerm, setSearchTerm] = useState("");
-    const handleSearchChange = (event) => {
+    const handleSearchChange = (event:any) => {
         const value = event.target.value;
         setSearchTerm(value);
 
         // Update filter for multiple columns
         table.setGlobalFilter(value);
     };
-    const Checkbox = ({ label, name, checked, onChange }) => (
+    const Checkbox = ({ label, name, checked, onChange }: any) => (
         <label className="custom-checkbox flex">
             <input
                 type="checkbox"
