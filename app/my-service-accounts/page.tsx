@@ -15,7 +15,7 @@ async function getData(): Promise<ServiceAccount[]> {
 const DemoPage: React.FC = () => {
   const [data, setData] = useState<ServiceAccount[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedAccount, setSelectedAccount] = useState<ServiceAccount | null>(null);
+  const [selectedAccount, setSelectedAccount] = useState<any | null>(null); // Need to change from any to use the ServiceAccount Interface
 
   useEffect(() => {
     const fetchData = async () => {
