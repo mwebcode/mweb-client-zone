@@ -1,3 +1,4 @@
+"use client";
 import {
     CorporateUser,
     MockedCustomerAccountData,
@@ -6,6 +7,8 @@ import {
 import {columns, IPayment} from "./columns"
 import {DataTable} from "./data-table"
 import MwebSliceContainer from "@/components/MwebSliceContainer";
+import {ServiceAccount} from "@/app/my-service-accounts/columns";
+import React, {useEffect, useState} from "react";
 
 const date = new Date();
 const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -46,10 +49,21 @@ const selfUser: any = getSelfAsUser();
 async function getData(): Promise<IPayment[]> {
     return payments;
 }
-
-export default async function DemoPage() {
-    const data = await getData();
+const DemoPage: React.FC = () => {
     getSelfAsUser();
+    const [selectedAccount, setSelectedAccount] = useState<any | null>(null); // Need to change from any to use the ServiceAccount Interface
+    const handleRowSelect = (row: any) => {
+        setSelectedAccount(row); // Update the selected account state
+        console.log(row);
+    };
+    const [data, setData] = useState<any[]>([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await getData();
+            setData(result);
+        };
+        fetchData();
+    }, [])
 
     return (
         <MwebSliceContainer
@@ -58,8 +72,9 @@ export default async function DemoPage() {
             padding='px-4 py-14 md:px-20 md:py-18 desktop:px-[182px] desktop:py-24'
         >
             <div className="  flex flex-col justify-center items-center">
-                <DataTable columns={columns} data={data} />
+                <DataTable columns={columns} data={data}  onRowSelect={handleRowSelect}/>
             </div>
         </MwebSliceContainer>
     )
 }
+export default DemoPage;
