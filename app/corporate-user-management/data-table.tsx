@@ -22,6 +22,14 @@ import {
 import {Button} from "@/components/ui/button";
 import React, {useEffect, useMemo, useState} from "react";
 import {Input} from "@/components/ui/input";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationLink, PaginationNext,
+    PaginationPrevious
+} from "@/components/ui/pagination";
 
 
 interface DataTableProps<TData, TValue> {
@@ -58,8 +66,6 @@ export function DataTable<TData, TValue>({
 
         return debouncedValue;
     };
-
-    const debouncedFilter = useDebounce(globalFilter, 300);
     interface ColumnFilter {
         id: string
         value: unknown
@@ -83,6 +89,11 @@ export function DataTable<TData, TValue>({
     const handleRowClick = (row: TData) => {
         onRowSelect(row); // Call the passed function to select a row
     };
+
+    const handleItemsPerPageChange = (value: number) => {
+        setItemsPerPage(value);
+        setCurrentPage(0); // Reset to first page
+    };
     const filteredData = useMemo(() => {
         return data.filter((row:any) =>
             filters[row.status]
@@ -95,6 +106,15 @@ export function DataTable<TData, TValue>({
             currentPage * itemsPerPage + itemsPerPage
         );
     }, [filteredData, currentPage, itemsPerPage]);
+
+    // Total pages based on filtered data
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+    const handlePageChange = (pageIndex: number) => {
+        if (pageIndex >= 0 && pageIndex < totalPages) {
+            setCurrentPage(pageIndex);
+        }
+    };
+
 
     const table = useReactTable({
         data: paginatedData,
@@ -126,22 +146,22 @@ export function DataTable<TData, TValue>({
         </label>
     );
     return (
-
         <div className="w-full max-w-[1024px] mx-auto items-center">
             <div className="flex flex-col sm:flex-row items-center justify-between py-4 gap-4">
                 <h2 className='text-lg font-bold'>Corporate User Management</h2>
-                <Input
-                    placeholder="Search...."
-                    value={globalFilter}
-                    onChange={(event) => setGlobalFilter(event.target.value)}
-                    className="max-w-full sm:max-w-sm"
-                />
+                <div className='mt-4'>
+                    <Input
+                        placeholder="Search...."
+                        value={globalFilter}
+                        onChange={(event) => setGlobalFilter(event.target.value)}
+                        className="max-w-full sm:max-w-sm mb-4"
+                    />
+                    <div className='mb-6 text-sm text-center sm:text-left'>
+                        Search by any column information type
+                    </div>
+                </div>
             </div>
 
-            {/* Subheading */}
-            <div className='mb-6 text-sm text-center sm:text-left'>
-                Search by any column information type
-            </div>
 
             {/* Filters */}
             <div className='mb-8 grid grid-cols-3 gap-4 sm:flex sm:gap-10'>
@@ -214,24 +234,50 @@ export function DataTable<TData, TValue>({
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-center space-x-2 py-4">
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
-                >
-                    Previous
-                </Button>
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
-                >
-                    Next
-                </Button>
+
+            <div className="flex items-center justify-between py-4">
+                <p>Items Per Page:</p>
+                <Select onValueChange={(value) => handleItemsPerPageChange(Number(value))}>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder={itemsPerPage.toString()} />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="10">10</SelectItem>
+                        <SelectItem value="20">20</SelectItem>
+                        <SelectItem value="30">30</SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
+            <Pagination>
+                <PaginationContent>
+                    <PaginationItem>
+                        <PaginationPrevious
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            aria-disabled={currentPage === 0}
+                        />
+                    </PaginationItem>
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <PaginationItem key={index}>
+                            <PaginationLink
+                                href="#"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handlePageChange(index);
+                                }}
+                                className={index === currentPage ? "active" : ""}
+                            >
+                                {index + 1}
+                            </PaginationLink>
+                        </PaginationItem>
+                    ))}
+                    <PaginationItem>
+                        <PaginationNext
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            aria-disabled={currentPage === totalPages - 1}
+                        />
+                    </PaginationItem>
+                </PaginationContent>
+            </Pagination>
         </div>
     )
 }
