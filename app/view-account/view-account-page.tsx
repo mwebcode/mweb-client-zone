@@ -198,6 +198,7 @@ interface Setting {
   selected: boolean;
   dataType: string;
   inputType: string;
+  password?: string;
   mandatory: boolean;
   displayGroup: string;
   displayOrder: number;
@@ -254,6 +255,8 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
   const [providerData, setProviderData] = useState<ProviderInfo[] | null>(null);
   const [groups, setGroups] = useState<Group[] | null>(null);
   const [data, setData] = useState<MailboxData | null>(null); 
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const [selectedOption, setSelectedOption] = useState("30 Days");
   const data1 = {
     labels: Array.from({ length: 31 }, (_, i) => i + 1),
@@ -356,7 +359,8 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
   const telephoneSetting = generalSettings.find(setting => setting.name === 'On-Site Contact Telephone Number');
   const propertyOwnerSetting = generalSettings.find(setting => setting.name === 'Property Owner');
   const secondLineSetting = generalSettings.find(setting => setting.name === 'Second Line Installation');
-
+ 
+  
   const getPassword = () => {
     if (groups && groups.length > 0) {
       const passwordSetting = groups[0].settings.find(setting => setting.name === 'password');
@@ -364,6 +368,14 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
     }
     return '';
   };
+
+  const password = getPassword();
+
+  // password toggler 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+  
 
 
   // Fetch the JSON data from the public folder
@@ -723,20 +735,22 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                     </p>
   
                     <label htmlFor="password">Password</label>
-                    <div className="password-field">
+                  <div className="password-field">
                       <input
-                        type="password"
-                        id="password"
-                        placeholder="********"
-                        value={
-                          groups && groups.length > 0
-                            ? groups[0].settings[0].name
-                            : ''
-                        }
-                        readOnly
+                      type={passwordVisible ? "text" : "password"}
+                      id="password"
+                      placeholder="********"
+                      value={
+                            groups && groups.length > 0 && groups[0].settings[0].value
+                           ? groups[0].settings[0].value
+                           : ''
+                           }
+                     readOnly
                       />
-                      <span className="toggle-password">👁️</span>
-                    </div>
+                    <button type="button" onClick={togglePasswordVisibility}>
+                       {passwordVisible ? "Hide" : "Show"} Password
+                    </button>
+                  </div>
                     <p>
                       {groups && groups.length > 0
                         ? groups[0].settings[0].description
@@ -876,7 +890,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
           <DialogFooter>
             <Button
               variant="outline"
-              onClick={() => setIsDialogOpen(false)}
+              onClick={() => setIsDialogOpen1(false)}
             >
               Close
             </Button>
@@ -935,7 +949,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
           <DialogFooter>
             <Button
               variant="outline"
-              onClick={handleDialogClose}
+              onClick={() => setIsDialogOpenAction(false)}
             >
               Close
             </Button>
