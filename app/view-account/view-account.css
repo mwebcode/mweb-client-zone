@@ -1,9 +1,4 @@
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f8f9fb;
-  }
+
   
   .back-button {
     background-color: transparent;
@@ -15,13 +10,13 @@
     align-items: center;
   }
   
-  .account-details-card {
+  /* .account-details-card {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-  }
+  } */
   
   .account-header {
     display: flex;

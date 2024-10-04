@@ -12,11 +12,10 @@ async function getData(): Promise<ServiceAccount[]> {
     return serviceAccounts;
 }
 
-const DemoPage: React.FC = () => {
+const ServiceAccountPage: React.FC = () => {
   const [data, setData] = useState<ServiceAccount[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedAccount, setSelectedAccount] = useState<any | null>(null); // Need to change from any to use the ServiceAccount Interface
-
+  const [selectedAccount, setSelectedAccount] = useState<any | null>(null); 
   useEffect(() => {
     const fetchData = async () => {
       const result = await getData();
@@ -32,12 +31,12 @@ const DemoPage: React.FC = () => {
   }
 
   const handleRowSelect = (row: ServiceAccount) => {
-    setSelectedAccount(row); // Update the selected account state
+    setSelectedAccount(row); 
     console.log(row);
   };
 
   const handleBack = () => {
-    setSelectedAccount(null); // Clear the selection to go back to the table
+    setSelectedAccount(null); 
   };
 
   return (
@@ -51,4 +50,4 @@ const DemoPage: React.FC = () => {
   );
 };
 
-export default DemoPage;
+export default ServiceAccountPage;

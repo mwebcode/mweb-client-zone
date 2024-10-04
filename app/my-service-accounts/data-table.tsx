@@ -140,8 +140,8 @@ export function DataTable<TData extends Record<string, any>, TValue>({
   };
 
   return (
-    <div className="container">
-      <div className="flex items-center py-4">
+    <div className="w-full max-w-[1024px] mx-auto items-center">
+      <div className="flex flex-col sm:flex-row items-center justify-between py-4 gap-4">
         <p className="service-account-title font-bold">MY SERVICE ACCOUNT</p>
         <Input
           placeholder="Search"
@@ -151,7 +151,6 @@ export function DataTable<TData extends Record<string, any>, TValue>({
         />
       </div>
       <p className="caption mt-2">Search by any column.</p>
-
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -189,7 +188,7 @@ export function DataTable<TData extends Record<string, any>, TValue>({
           </TableBody>
         </Table>
       </div>
-
+  
       <div className="flex items-center justify-between py-4">
         <p>Items Per Page:</p>
         <Select onValueChange={(value) => handleItemsPerPageChange(Number(value))}>
@@ -203,7 +202,7 @@ export function DataTable<TData extends Record<string, any>, TValue>({
           </SelectContent>
         </Select>
       </div>
-
+  
       <Pagination>
         <PaginationContent>
           <PaginationItem>
