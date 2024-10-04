@@ -62,8 +62,9 @@ const DemoPage: React.FC = () => {
             const result = await getData();
             setData(result);
         };
-        fetchData();
+        fetchData().then(data => data);
     }, [])
+
 
     return (
         <MwebSliceContainer
