@@ -200,3 +200,21 @@ body {
   transform: rotate(45deg);
 }
 
+/* This can be in your global CSS file or a module CSS file */
+.table-container {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  width: 100%; /* Ensure the container takes full width */
+}
+
+.table {
+  width: 100%; /* Ensure the table takes full width */
+  table-layout: auto; /* Allow the table to adjust based on content */
+}
+
+.card {
+  padding: 1rem; /* Adjust padding for better mobile view */
+}
+
+/* You can customize styles for the table headers and cells as needed */
+
+

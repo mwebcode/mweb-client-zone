@@ -23,9 +23,10 @@ export const columns: ColumnDef<IPayment>[] = [
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className='uppercase lg:normal-case'
                 >
                     Status
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className="hidden lg:inline-block md:ml-2 md:h-4 md:w-4" />
                 </Button>
             )
         },
@@ -37,9 +38,10 @@ export const columns: ColumnDef<IPayment>[] = [
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className='uppercase lg:normal-case'
                 >
                     Account Id
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className="hidden lg:inline-block md:ml-2 md:h-4 md:w-4" />
                 </Button>
             )
         },
@@ -51,9 +53,10 @@ export const columns: ColumnDef<IPayment>[] = [
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className='uppercase lg:normal-case'
                 >
                    Name
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className="hidden lg:inline-block md:ml-2 md:h-4 md:w-4" />
                 </Button>
             )
         },
@@ -66,9 +69,10 @@ export const columns: ColumnDef<IPayment>[] = [
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className='uppercase lg:normal-case'
                 >
                     Email Address
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className="hidden lg:inline-block md:ml-2 md:h-4 md:w-4" />
                 </Button>
             )
         },
@@ -80,9 +84,10 @@ export const columns: ColumnDef<IPayment>[] = [
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className='uppercase lg:normal-case'
                 >
                     Username
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className="hidden lg:inline-block md:ml-2 md:h-4 md:w-4" />
                 </Button>
             )
         },
@@ -94,25 +99,13 @@ export const columns: ColumnDef<IPayment>[] = [
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className='uppercase lg:normal-case'
                 >
                     Create Date
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className="hidden lg:inline-block md:ml-2 md:h-4 md:w-4" />
                 </Button>
             )
         },
     },
-    // {
-    //     accessorKey: "amount",
-    //     header: () => <div className="text-right">Amount</div>,
-    //     cell: ({ row }) => {
-    //         const amount = parseFloat(row.getValue("amount"))
-    //         const formatted = new Intl.NumberFormat("en-US", {
-    //             style: "currency",
-    //             currency: "USD",
-    //         }).format(amount)
-    //
-    //         return <div className="text-right font-medium">{formatted}</div>
-    //     },
-    // },
 ]
 
