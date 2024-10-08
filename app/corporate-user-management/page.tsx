@@ -50,9 +50,8 @@ const selfUser: any = getSelfAsUser();
 async function getData(): Promise<IPayment[]> {
     return payments;
 }
-const DemoPage: React.FC = () => {
+const CorporateUserManagementPage: React.FC = () => {
     getSelfAsUser();
-    const [selectedAccount, setSelectedAccount] = useState<any | null>(null); // Need to change from any to use the ServiceAccount Interface
     const handleRowSelect = (row: any) => {
         // getCustomerAccount(row).then(r => r)
     };
@@ -79,4 +78,4 @@ const DemoPage: React.FC = () => {
         </MwebSliceContainer>
     )
 }
-export default DemoPage;
+export default CorporateUserManagementPage;

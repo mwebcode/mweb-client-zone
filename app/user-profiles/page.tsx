@@ -1,13 +1,11 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {
     contractsMockedData,
-    CorporateUser,
 } from "@/app/corporate-user-management/mockedCustomerAccountData";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 import MwebSliceContainer from "@/components/MwebSliceContainer";
 import {Button} from "@/components/ui/button";
-import {flexRender} from "@tanstack/react-table";
 import {Select, SelectValue} from "@radix-ui/react-select";
 import {SelectContent, SelectItem, SelectTrigger} from "@/components/ui/select";
 
