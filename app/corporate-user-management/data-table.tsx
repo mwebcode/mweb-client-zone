@@ -35,7 +35,7 @@ import {
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[] | any
-    onRowSelect: (row: TData) => void; // New prop for row selection
+    onRowSelect: (row: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -43,6 +43,12 @@ export function DataTable<TData, TValue>({
                                              data,
                                              onRowSelect,
                                          }: DataTableProps<TData, TValue>) {
+
+    interface ColumnFilter {
+        id: string
+        value: unknown
+    }
+
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
@@ -50,26 +56,6 @@ export function DataTable<TData, TValue>({
     const [globalFilter, setGlobalFilter] = useState<any>([])
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(0);
-
-    const useDebounce = (value: string, delay: number) => {
-        const [debouncedValue, setDebouncedValue] = useState(value);
-
-        useEffect(() => {
-            const handler = setTimeout(() => {
-                setDebouncedValue(value);
-            }, delay);
-
-            return () => {
-                clearTimeout(handler);
-            };
-        }, [value, delay]);
-
-        return debouncedValue;
-    };
-    interface ColumnFilter {
-        id: string
-        value: unknown
-    }
 
     const [filters, setFilters] = useState(({
         Active: true,
@@ -87,18 +73,18 @@ export function DataTable<TData, TValue>({
     type ColumnFiltersState = ColumnFilter[];
 
     const handleRowClick = (row: TData) => {
-        onRowSelect(row); // Call the passed function to select a row
+        onRowSelect(row);
     };
 
     const handleItemsPerPageChange = (value: number) => {
         setItemsPerPage(value);
-        setCurrentPage(0); // Reset to first page
+        setCurrentPage(0);
     };
     const filteredData = useMemo(() => {
         return data.filter((row:any) =>
             filters[row.status]
         );
-    }, [data, filters]);  // Recalculate only when data or filters change
+    }, [data, filters]);
     // Paginated data
     const paginatedData = React.useMemo(() => {
         return filteredData.slice(
@@ -132,7 +118,6 @@ export function DataTable<TData, TValue>({
         },
 
     });
-    console.log(table.getState().columnFilters)
     const Checkbox = ({ label, name, checked, onChange }: any) => (
         <label className="custom-checkbox flex">
             <input
@@ -147,94 +132,94 @@ export function DataTable<TData, TValue>({
     );
     return (
         <div className="w-full max-w-[1024px] mx-auto items-center">
-            <div className="flex flex-col sm:flex-row items-center justify-between py-4 gap-4">
-                <h2 className='text-lg font-bold'>Corporate User Management</h2>
-                <div className='mt-4'>
-                    <Input
-                        placeholder="Search...."
-                        value={globalFilter}
-                        onChange={(event) => setGlobalFilter(event.target.value)}
-                        className="max-w-full sm:max-w-sm mb-4"
-                    />
-                    <div className='mb-6 text-sm text-center sm:text-left'>
-                        Search by any column information type
+            <div className="table-container">
+                <div className="flex flex-col sm:flex-row items-center justify-between py-4 gap-4">
+                    <h2 className='text-lg font-bold'>Corporate User Management</h2>
+                    <div className='mt-4'>
+                        <Input
+                            placeholder="Search...."
+                            value={globalFilter}
+                            onChange={(event) => setGlobalFilter(event.target.value)}
+                            className="max-w-full sm:max-w-sm mb-4"
+                        />
+                        <div className='mb-6 text-sm text-center sm:text-left'>
+                            Search by any column information type
+                        </div>
                     </div>
+                </div>
+                <div className="mb-8 grid grid-cols-1 sm:grid-cols-4 gap-4">
+                    Status filter:
+                    <Checkbox
+                        label="Active"
+                        name="Active"
+                        checked={filters.Active}
+                        onChange={handleCheckboxChange}
+                    />
+                    <Checkbox
+                        label="Inactive"
+                        name="Inactive"
+                        checked={filters.Inactive}
+                        onChange={handleCheckboxChange}
+                    />
+                    <Checkbox
+                        label="Suspended"
+                        name="Suspended"
+                        checked={filters.Suspended}
+                        onChange={handleCheckboxChange}
+                    />
+                </div>
+                {/* Table for Larger Screens */}
+                <div className="hidden lg:block rounded-md border">
+                    <Table className="table">
+                        <TableHeader>
+                            {table.getHeaderGroups().map((headerGroup) => (
+                                <TableRow key={headerGroup.id}>
+                                    {headerGroup.headers.map((header) => (
+                                        <TableHead key={header.id}>
+                                            {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                                        </TableHead>
+                                    ))}
+                                </TableRow>
+                            ))}
+                        </TableHeader>
+                        <TableBody>
+                            {paginatedData.length ? (
+                                table.getRowModel().rows.map((row) => (
+                                    <TableRow key={row.id} onClick={() => handleRowClick(row.original)}>
+                                        {row.getVisibleCells().map((cell) => (
+                                            <TableCell key={cell.id}>
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={columns.length} className="h-24 text-center">No results.</TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
                 </div>
             </div>
 
-
-            {/* Filters */}
-            <div className='mb-8 grid grid-cols-3 gap-4 sm:flex sm:gap-10'>
-                <Checkbox
-                    label="Active"
-                    name='Active'
-                    checked={filters.Active}
-                    onChange={handleCheckboxChange}
-                />
-                <Checkbox
-                    label="Inactive"
-                    name='Inactive'
-                    checked={filters.Inactive}
-                    onChange={handleCheckboxChange}
-                />
-                <Checkbox
-                    label="Suspended"
-                    name='Suspended'
-                    checked={filters.Suspended}
-                    onChange={handleCheckboxChange}
-                />
+            {/* Stacked Cards for Mobile */}
+            <div className="lg:hidden">
+                {paginatedData.length ? (
+                    table.getRowModel().rows.map((row, index) => (
+                        <div key={index} className="card mb-4 bg-white rounded-md shadow-md border">
+                            {row.getVisibleCells().map((cell:any, cellIndex) => (
+                                <div key={cellIndex} className="flex justify-between py-2">
+                                    <span className="font-light">{flexRender(cell.column.columnDef.header, cell.getContext())}</span>
+                                    <span className='font-black'>{flexRender(cell.column.columnDef.cell, cell.getContext())}</span>
+                                </div>
+                            ))}
+                        </div>
+                    ))
+                ) : (
+                    <div className="text-center py-4">No results.</div>
+                )}
             </div>
-
-            {/* Table */}
-            <div className="rounded-md border overflow-x-auto">
-                <Table>
-                    <TableHeader>
-                        {table.getHeaderGroups().map((headerGroup) => (
-                            <TableRow key={headerGroup.id}>
-                                {headerGroup.headers.map((header) => {
-                                    return (
-                                        <TableHead key={header.id}>
-                                            {header.isPlaceholder
-                                                ? null
-                                                : flexRender(
-                                                    header.column.columnDef.header,
-                                                    header.getContext()
-                                                )}
-                                        </TableHead>
-                                    )
-                                })}
-                            </TableRow>
-                        ))}
-                    </TableHeader>
-                    <TableBody>
-
-                        {paginatedData.length ? (
-                            table.getRowModel().rows.map((row) => (
-                                <TableRow
-                                    key={row.id}
-                                    onClick={() => handleRowClick(row.original)} // Row click handler
-                                >
-                                    {row.getVisibleCells().map((cell: Cell<TData, TValue>) => (
-                                        <TableCell key={cell.id}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            ))
-                        ) : (
-                            <TableRow>
-                                <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No results.
-                                </TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-
-                </Table>
-            </div>
-
-            {/* Pagination */}
-
             <div className="flex items-center justify-between py-4">
                 <p>Items Per Page:</p>
                 <Select onValueChange={(value) => handleItemsPerPageChange(Number(value))}>
