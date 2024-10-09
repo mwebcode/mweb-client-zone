@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import './view-account.css';
+// import './view-account.css';
 import {
   Accordion,
   AccordionContent,
@@ -10,14 +10,11 @@ import {
 } from "@/components/ui/accordion";
 import { InfoIcon } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGear, faScrewdriverWrench,faChartColumn,faCog  } from '@fortawesome/free-solid-svg-icons';
+import { faGear, faScrewdriverWrench,faChartColumn,faCog,faEnvelope, faWifi, faShield,faList, faTrash} from '@fortawesome/free-solid-svg-icons';
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Button } from "@/components/ui/button"
 import { Bar } from "react-chartjs-2";
-
-
-
 import {
   Tooltip,
   TooltipContent,
@@ -34,6 +31,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
 
 import {
   Chart as ChartJS,
@@ -42,6 +48,7 @@ import {
   LinearScale,
   Legend,
 } from "chart.js";
+import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Legend);
@@ -78,9 +85,25 @@ export interface Contract {
   canChangeProduct: boolean;
   appliedVoucher: string | null;
   services: Service[];
-  servicesInfo: any[];
+  servicesInfo: ServiceInfo[];
   links: any[];
   cantChangeProductReasons: any[];
+}
+
+export interface ServiceInfo {
+  id: number;
+  serviceTypeId: number;
+  name: string;
+  status: string;
+  crm1: string;
+  crm2: string | null;
+  provider: string;
+  hasInstallationAddress: boolean;
+  installationAddress: string | null;
+  hasUsageData: boolean;
+  hasServiceSettings: boolean;
+  hasServiceActions: boolean;
+  links: any[];
 }
 
 export interface ServiceAccount {
@@ -173,10 +196,6 @@ interface ServiceData {
   info: InfoItem[];
 }
 
-interface ServiceAccountDetailsProps {
-  account: ServiceAccount;
-  onBack: () => void;
-}
 interface ProviderInfo {
   id: number;
   name: string;
@@ -246,76 +265,102 @@ interface MailboxData {
 }
 
 
-const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, onBack }) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isDialogOpen1, setIsDialogOpen1] = useState(false);
-  const [isDialogOpenAction, setIsDialogOpenAction] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [friendlyName, setFriendlyName] = useState(account.customerFriendlyName);
-  const [expandedServiceId, setExpandedServiceId] = useState<number | null>(null);
-  const [serviceData, setServiceData] = useState<ServiceSettings | null>(null);
-  const [providerData, setProviderData] = useState<ProviderInfo[] | null>(null);
-  const [groups, setGroups] = useState<Group[] | null>(null);
-  const [data, setData] = useState<MailboxData | null>(null); 
-  const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const [selectedOption, setSelectedOption] = useState("30 Days");
-  const data1 = {
-    labels: Array.from({ length: 31 }, (_, i) => i + 1),
-    datasets: [
-      {
-        label: "Download",
-        data: [50, 60, 80, 70, 90, 40, 60, 85, 65, 30, 50, 60, 70, 65, 55, 60, 55, 45, 40, 50, 60, 40, 55, 45, 50, 55, 75, 65, 40, 50, 65],
-        backgroundColor: "#4dc9f6",
-      },
-      {
-        label: "Upload",
-        data: [10, 20, 25, 15, 30, 10, 20, 40, 30, 20, 15, 30, 20, 25, 20, 10, 15, 20, 15, 25, 20, 10, 20, 15, 25, 15, 30, 25, 20, 15, 10],
-        backgroundColor: "#36a2eb",
-      },
-      {
-        label: "Night time data",
-        data: [5, 10, 15, 10, 20, 5, 10, 25, 20, 10, 10, 15, 10, 15, 10, 5, 10, 15, 10, 15, 10, 5, 15, 10, 15, 10, 20, 15, 10, 5, 10],
-        backgroundColor: "#ffcd56",
-      },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    scales: {
-      x: {
-        stacked: true,
-      },
-      y: {
-        stacked: true,
-        beginAtZero: true,
-      },
-    },
-    plugins: {
-      legend: {
-        position: "top" as "top", 
-      },
-    },
-  };
+   
   
-  
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/fibre-service.json');
+   
+    async function getData(): Promise<ServiceAccount[]> {
+        const response = await fetch("/MockedServiceAccount.json");
         const data = await response.json();
-        setProviderData(data.info); 
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+        const serviceAccounts = data.customerData?.serviceAccounts || [];
+        return serviceAccounts;
+    }
+    
+    const ProductPage: React.FC = () => {
+      const [data, setData] = useState<ServiceAccount[]>([]);
+      const [filteredData, setFilteredData] = useState<ServiceAccount[]>([]); 
+      const [loading, setLoading] = useState<boolean>(true);
+      const [isEditing, setIsEditing] = useState(false);
+      const [isDialogOpen, setIsDialogOpen] = useState(false);
+      const [isDialogOpen1, setIsDialogOpen1] = useState(false);
+      const [isDialogOpenAction, setIsDialogOpenAction] = useState(false);
+      const [serviceData, setServiceData] = useState<ServiceSettings | null>(null);
+      const [groups, setGroups] = useState<Group[] | null>(null);
+      const [providerData, setProviderData] = useState<ProviderInfo[] | null>(null);
+      const [passwordVisible, setPasswordVisible] = useState(false);
+      const [data1, setData1] = useState<MailboxData | null>(null); 
+      const [isOpen, setIsOpen] = useState(false);
+      const [filter, setFilter] = useState<string>('Show All'); 
+      const router = useRouter();
+      const data2 = {
+        labels: Array.from({ length: 31 }, (_, i) => i + 1),
+        datasets: [
+          {
+            label: "Download",
+            data: [50, 60, 80, 70, 90, 40, 60, 85, 65, 30, 50, 60, 70, 65, 55, 60, 55, 45, 40, 50, 60, 40, 55, 45, 50, 55, 75, 65, 40, 50, 65],
+            backgroundColor: "#4dc9f6",
+          },
+          {
+            label: "Upload",
+            data: [10, 20, 25, 15, 30, 10, 20, 40, 30, 20, 15, 30, 20, 25, 20, 10, 15, 20, 15, 25, 20, 10, 20, 15, 25, 15, 30, 25, 20, 15, 10],
+            backgroundColor: "#36a2eb",
+          },
+          {
+            label: "Night time data",
+            data: [5, 10, 15, 10, 20, 5, 10, 25, 20, 10, 10, 15, 10, 15, 10, 5, 10, 15, 10, 15, 10, 5, 15, 10, 15, 10, 20, 15, 10, 5, 10],
+            backgroundColor: "#ffcd56",
+          },
+        ],
+      };
+    
+      const options = {
+        responsive: true,
+        scales: {
+          x: {
+            stacked: true,
+          },
+          y: {
+            stacked: true,
+            beginAtZero: true,
+          },
+        },
+        plugins: {
+          legend: {
+            position: "top" as "top", 
+          },
+        },
+      };
+      
+      
+      useEffect(() => {
+        const fetchData = async () => {
+          const result = await getData();
+          setData(result);
+          console.log('data :', result)
+          setLoading(false);
+        };
+    
+        fetchData();
+      }, []);
 
-    fetchData();
-  }, []);
 
-  // Fetch service settings data, groups and settings
+      // Fetching service settings
+      useEffect(() => {
+        const fetchServiceData = async () => {
+          try {
+            const response = await fetch('/fibre-service.json');
+            const data = await response.json();
+            setServiceData(data);
+            setGroups(data.groups);
+          } catch (error) {
+            console.error('Error fetching service data:', error);
+          }
+        };
+    
+        fetchServiceData();
+      }, []);
+
+      // Fetch service settings data, groups and settings
   useEffect(() => {
     const fetchServiceData = async () => {
       try {
@@ -336,118 +381,145 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
     const fetchData = async () => {
       const response = await fetch('/actionsSetting.json');
       const result = await response.json();
-      setData(result);
+      setData1(result);
     };
 
     fetchData();
   }, []);
 
-  const handleClick = (option: React.SetStateAction<string>) => {
-    setSelectedOption(option);
-  };
- 
-  
+      const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, name: string) => {
+        // Handle input changes here
+        console.log(name, e.target.value);
+      };
+
+      const generalSettings = groups?.find(group => group.displayGroup === 'General')?.settings || [];
+      const mobileNumberSetting = generalSettings.find(setting => setting.name === 'On-site Contact Mobile Number');
+      const emailSetting = generalSettings.find(setting => setting.name === 'On-Site Contact Email Address');
+      const telephoneSetting = generalSettings.find(setting => setting.name === 'On-Site Contact Telephone Number');
+      const propertyOwnerSetting = generalSettings.find(setting => setting.name === 'Property Owner');
+      const secondLineSetting = generalSettings.find(setting => setting.name === 'Second Line Installation');
 
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, name: string) => {
-    // Handle input changes here
-    console.log(name, e.target.value);
-  };
+      const handleIconClick = () => {
+        setIsDialogOpen(true);
+      };
 
-  const generalSettings = groups?.find(group => group.displayGroup === 'General')?.settings || [];
+      const closeDialog = () => {
+        setIsDialogOpen(false);
+      };
 
-  const mobileNumberSetting = generalSettings.find(setting => setting.name === 'On-site Contact Mobile Number');
-  const emailSetting = generalSettings.find(setting => setting.name === 'On-Site Contact Email Address');
-  const telephoneSetting = generalSettings.find(setting => setting.name === 'On-Site Contact Telephone Number');
-  const propertyOwnerSetting = generalSettings.find(setting => setting.name === 'Property Owner');
-  const secondLineSetting = generalSettings.find(setting => setting.name === 'Second Line Installation');
- 
-  
-  const getPassword = () => {
-    if (groups && groups.length > 0) {
-      const passwordSetting = groups[0].settings.find(setting => setting.name === 'password');
-      return passwordSetting ? passwordSetting.value : '';
-    }
-    return '';
-  };
+      const handleEditClick = () => {
+        setIsEditing(true);
+      };
+    
+      const handleSave = () => {
+        setIsEditing(false);
+      };
+    
+      const handleCancel = () => {
+        // setFriendlyName(account.customerFriendlyName);
+        setIsEditing(false);
+      };
 
-  const password = getPassword();
+      const viewServiceActionActivationDialog = () => {
+        setIsDialogOpen1(true);
+      };
 
-  // password toggler 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-  
+      const viewServiceSettingsDialog = () => {
+        console.log('handleIconClickAction triggered');
+        setIsDialogOpenAction(true);
+      };
 
+      const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+      };
 
-  // Fetch the JSON data from the public folder
-    useEffect(() => {
-        fetch('/settings.json')
-            .then((response) => response.json())
-            .then((data: ServiceSettings) => {
-                setServiceData(data);
-            })
-            .catch((error) => console.error('Error fetching the JSON:', error));
-    }, []);
+      const toggleAccordion = () => {
+        setIsOpen(!isOpen);
+      };
 
-  const viewUsageDataWithAccordion = (serviceId: number | null) => {
-    setExpandedServiceId(prevId => (prevId === serviceId ? null : serviceId));
-  };
+      useEffect(() => {
+        if (filter === 'Show All') {
+          setFilteredData(data); // Show all data if 'Show All' is clicked
+        } else if (filter === 'Fibre') {
+          // Filter data for "Fibre" services (using service ID 564)
+          const fibreData = data.filter(account =>
+            account.contracts.some(contract =>
+              contract.servicesInfo.some(serviceInfo => serviceInfo.serviceTypeId === 564)
+            )
+          );
+          console.log('filter data :', fibreData)
+          setFilteredData(fibreData);
+        } else if (filter === 'Other') {
+          const otherData = data.filter(account =>
+            account.contracts.some(contract =>
+              contract.servicesInfo.some(serviceInfo => serviceInfo.serviceTypeId !== 564)
+            )
+          )
+          setFilteredData(otherData);
+        }
+      }, [filter, data]);
+    
+      // Button click handlers to update the filter
+      const handleShowAll = () => {
+        setFilter('Show All');
+      };
+    
+      const handleFibreFilter = () => {
+        setFilter('Fibre');
+      };
 
-  const handleIconClick = () => {
-    setIsDialogOpen(true);
-  };
+      const handleOtherFilter = () => {
+        setFilter('Other');
+      };
 
-  const closeDialog = () => {
-    setIsDialogOpen(false);
-  };
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleSave = () => {
-    setIsEditing(false);
-  };
-
-  const handleCancel = () => {
-    setFriendlyName(account.customerFriendlyName);
-    setIsEditing(false);
-  };
-  const viewServiceActionActivationDialog = () => {
-    setIsDialogOpen1(true);
-  };
-
-  const viewServiceSettingsDialog = () => {
-    console.log('handleIconClickAction triggered');
-    setIsDialogOpenAction(true);
-  };
-  
-
-  const handleDialogClose = () => {
-    setIsDialogOpen(false); 
-  };
-
-
-  const servicesTobeDisplayed = account.services.filter(service =>
-    ![566, 4, 138, 50].includes(service.serviceTypeId)
-  );
-
+    
   return (
     <div className="w-full max-w-[1024px] mx-auto items-center">
-      <button className="back-button" onClick={onBack}>
-        Back to My Service Accounts
-      </button>
-  
-      <div className="account-details-card">
-        <div className="account-header">
+      {/* Filter Section */}
+      <Card className=" bg-white flex items-center space-x-4 py-2">
+        <span className="text-blue-800 font-semibold flex items-center">
+          <i className="fas fa-filter mr-2"></i> Filter my products:
+        </span>
+        <Button variant="outline" onClick={() => router.push('/my-products/emails-table')}>
+        <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '8px' }} /> Email
+        </Button>
+        <Button variant="outline" onClick={handleFibreFilter}>
+        <FontAwesomeIcon icon={faWifi} style={{ marginRight: '8px' }} />
+        Fibre
+        </Button>
+        <Button variant="outline" onClick={handleOtherFilter}>
+        <FontAwesomeIcon icon={faShield} style={{ marginRight: '8px' }} />
+        Other
+      </Button>
+        <Button variant="outline" onClick={handleShowAll}>
+        Show All
+        </Button>
+        <Button variant="outline" onClick={() => router.push('/my-service-accounts')}>
+        <FontAwesomeIcon icon={faList} style={{ marginRight: '8px' }}/> My Service Accounts
+        </Button>
+      </Card>
+
+      {/* Filtered Results Section */}
+      {filteredData.map((account) => {
+        // Filter services based on serviceTypeId
+        const servicesTobeDisplayed = account.services.filter(service =>
+          ![566, 4, 138, 50].includes(service.serviceTypeId)
+        );
+        
+        
+        return (
+          <Card key={account.serviceAccountId} className="mt-6 p-4  rounded bg-white grid grid-cols-3 gap-4">
+            {/* Product Info Section (Left side) */}
+            <Card className="bg-white col-span-2 p-6 ">
+            <div className="account-header">
           <h2 className="account-title" style={{ marginBottom: '0' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               {isEditing ? (
                 <input
                   type="text"
-                  value={friendlyName}
-                  onChange={(e) => setFriendlyName(e.target.value)}
+                  value={account.customerFriendlyName}
+                //   onChange={(e) => setFriendlyName(e.target.value)}
                   onBlur={handleSave} // Save on blur
                   onKeyDown={(e) => e.key === 'Enter' && handleSave()}
                   style={{
@@ -467,7 +539,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                       color: '#004D6E',
                     }}
                   >
-                    {friendlyName}
+                    {account.customerFriendlyName}
                   </span>
                   <img
                     src="https://img.icons8.com/?size=100&id=ltMOGtgNYnUg&format=png&color=000000"
@@ -509,45 +581,105 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
               </TooltipProvider>
             </div>
   
-            <span className="account-price">
-              R{account.contracts[0]?.activeRate} PM
+            <span 
+            style={{
+              fontSize: '19px',
+              fontWeight: 'bold',
+              color: '#004D6E',
+            }}>
+              R{account.contracts[0]?.displayName} PM
             </span>
           </h2>
         </div>
-  
-        <div className="account-address">
-          {account.serviceAccountPrimaryContactDisplayName}
+        <p className="text-gray-600 mb-6">
+           {`R${account.contracts[0]?.activeRate} PM`}
+        </p>
+
+        <Button variant="outline" onClick={() => router.push('/my-service-accounts')}  className="mr-4">
+         Get Faster Fibre
+        </Button>
+        <Button variant="outline" onClick={() => router.push('/my-service-accounts')}  className="mr-4">
+         Add New Product
+        </Button>
+        {account.contracts[0]?.canChangeProduct &&(
+        <Button variant="outline" onClick={() => router.push('/my-service-accounts')}  className="mb-4">
+         Change product
+        </Button>
+        )}
+
+{servicesTobeDisplayed.length > 0 ? (
+      <div className="w-full">
+      {/* Header Section */}
+      <div className="flex items-center space-x-4">
+        <span className="font-semibold text-gray-600">Usage</span>
+
+        {/* Time Range Buttons */}
+        <div className="flex space-x-2">
+          <Button variant="outline">30 DAYS</Button>
+          <Button variant="outline">12 MONTHS</Button>
         </div>
-  
-        <div className="contracts-section">
-          <h3>Contracts</h3>
-          {account.contracts.map((contract) => (
-            <div key={contract.id} className="contract-row">
-              <Badge variant="outline">{contract.status}</Badge>
-              <span className="contract-description">{contract.displayName}</span>
-              <span className="contract-price">R{contract.activeRate} PM</span>
+
+        {/* Dropdown */}
+        <div className="relative">
+          <Button variant="outline">
+            VIEW BY MONTH <span className="ml-2">▼</span>
+          </Button>
+          {/* Dropdown content */}
+          <div className="absolute mt-2 w-full rounded-md shadow-lg hidden">
+            <div className="py-1 bg-white rounded-md shadow-xs">
+              <a href="#" className="block px-4 py-2 text-sm text-gray-700">Option 1</a>
+              <a href="#" className="block px-4 py-2 text-sm text-gray-700">Option 2</a>
             </div>
-          ))}
+          </div>
         </div>
-  
-        <div className="included-services-section">
-          <h3>Included Services</h3>
-          <table className="included-services-table">
-            <thead>
-            </thead>
-            <tbody>
-              {servicesTobeDisplayed.length ? (
-                servicesTobeDisplayed.map((service) => (
-                  <React.Fragment key={service.id}>
-                    <tr>
-                      <td>
-                      <Badge variant="outline">{service.status}</Badge>
-                        {/* <span className="status-label">{service.status}</span> */}
-                      </td>
-                      <td>{service.name}</td>
-                      <td>{service.crm1 || 'N/A'}</td>
-                      <td>
-                        {/* Service Settings Icon - Remove this entirely if hasServiceActions is true */}
+
+        {/* Plus Icon for Accordion */}
+        <div className="ml-auto">
+          <button
+            className="text-xl font-bold text-gray-800 mb-6"
+            onClick={toggleAccordion} // Toggles the accordion
+          >
+            {isOpen ? '-' : '+'}
+          </button>
+        </div>
+      </div>
+
+      {/* Accordion Content Below */}
+      {isOpen && (
+        <Card className="bg-white">
+          <div className="chart-container">
+                <Bar data={data2} options={options} />
+          </div>
+          {/* Add more content here as needed */}
+        </Card>
+      )}
+    </div>
+    ) : (
+      <p className="text-gray-600"></p>
+    )}
+
+ 
+              {/* Included Services Section */}
+              <div>
+                <h2 className="text-lg font-semibold mb-2">Included Services</h2>
+
+                {/* Display services in a table */}
+                {servicesTobeDisplayed.length > 0 ? (
+                  <table className="table-auto w-full text-left">
+                    <thead>
+                      <tr>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {servicesTobeDisplayed.map((service, index) => (
+                        <tr key={index} className="border-t">
+                          <td className="px-4 py-2">
+                            <Badge variant="outline">{service.status}</Badge>
+                          </td>
+                          <td className="px-4 py-2 text-gray-700">{service.name}</td>
+                          <td className="px-4 py-2 text-gray-600">{service.crm1 || 'N/A'}</td>
+                          <td className="px-4 py-2">
+                           {/* Service Settings Icon - Remove this entirely if hasServiceActions is true */}
                         {service.hasServiceSettings &&
                           !service.hasServiceActions && (
                             <FontAwesomeIcon
@@ -568,20 +700,6 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                               }}
                             />
                           )}
-  
-                        {/* Usage Data Icon */}
-                        {service.hasUsageData && (
-                          <FontAwesomeIcon
-                            icon={faChartColumn}
-                            size="lg"
-                            onClick={() => viewUsageDataWithAccordion(service.id)}
-                            style={{
-                              cursor: 'pointer',
-                              color: '#000',
-                              marginRight: '8px',
-                            }}
-                          />
-                        )}
   
                         {/* Service Actions Icons */}
                         {service.hasServiceActions && (
@@ -626,64 +744,22 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                             />
                           </>
                         )}
-                      </td>
-                    </tr>
-  
-                    {/* Accordion Details */}
-                    {expandedServiceId === service.id && (
-                      <tr>
-                        <td colSpan={4}>
-                          <div className="button-container">
-                            <button
-                              className={`option-button ${
-                                selectedOption === '30 Days' ? 'active' : ''
-                              }`}
-                              onClick={() => handleClick('30 Days')}
-                            >
-                              30 Days
-                            </button>
-                            <button
-                              className={`option-button ${
-                                selectedOption === '12 Months' ? 'active' : ''
-                              }`}
-                              onClick={() => handleClick('12 Months')}
-                            >
-                              12 Months
-                            </button>
-                            <div className="dropdown">
-                              <span>View by month</span>
-                              <select>
-                                <option value="July 2024">July 2024</option>
-                                {/* Add other month options as needed */}
-                              </select>
-                            </div>
-                          </div>
-                          <div className="chart-container">
-                            <Bar data={data1} options={options} />
-                          </div>
-                        </td>
-                      </tr>
-                    )}
-                  </React.Fragment>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={4} className="text-center">
-                    No included services available.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-  
-        <div className="additional-info">
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-  
-      {/* Dialog for Settings */}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                    
+                     <FontAwesomeIcon 
+                     icon={faTrash} 
+                     style={{ color: "#c60606" }} 
+                     /> 
+                  </table>
+                ) : (
+                  <p className="text-gray-600">No services available</p>
+                )}
+              </div>
+            </Card>
+            {/* Dialog for Settings */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogTrigger asChild>
           <button
@@ -772,7 +848,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                     ? groups[1].displayGroup
                     : 'Default Group Name'}
                 </AccordionTrigger>
-                <AccordionContent>
+                <AccordionContent style={{ backgroundColor: 'white' }}>
                   <div className="form-container">
                     <div className="form-group">
                       <label htmlFor="mobileNumber">
@@ -873,8 +949,8 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
           </DialogFooter>
         </DialogContent>
       </Dialog>
-  
-      {/* Spanel */}
+            
+            {/* Spanel */}
       <Dialog open={isDialogOpen1} onOpenChange={setIsDialogOpen1}>
         <DialogTrigger asChild>
           <button style={{ display: 'none' }}>Open</button>
@@ -882,7 +958,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
         <DialogContent style={{ backgroundColor: 'white' }}>
           <DialogHeader>
             <DialogTitle>
-              {data?.dialogTitle} Settings - {data?.username}
+              {data1?.dialogTitle} Settings - {data1?.username}
             </DialogTitle>
             <DialogDescription>
               Activate your free mailbox as it has not been created or was
@@ -909,14 +985,14 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
         <DialogContent style={{ backgroundColor: 'white' }}>
           <DialogHeader>
             <DialogTitle>
-              {data?.dialogTitle} Settings - {data?.serviceIdentifier}
+              {data1?.dialogTitle} Settings - {data1?.serviceIdentifier}
             </DialogTitle>
             <DialogDescription>
               <Accordion type="single" collapsible>
                 <AccordionItem value="item-1">
                   <AccordionTrigger>Information</AccordionTrigger>
                   <AccordionContent>
-                    {data?.info.map((item) => (
+                    {data1?.info.map((item) => (
                       <div key={item.id}>
                         <strong>{item.name}</strong>: 
                         <p>{item.description}</p>
@@ -930,7 +1006,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                 <AccordionItem value="aliases">
                   <AccordionTrigger>Aliases</AccordionTrigger>
                   <AccordionContent>
-                    {data?.settings.map((setting) => (
+                    {data1?.settings.map((setting) => (
                       <div key={setting.serviceTypeParameterId}>
                         <strong>{setting.name}</strong>: {setting.description}
                         <input
@@ -960,11 +1036,57 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+            {/* Recommendation Section (Right side) */}
+            <Card className="p-4  border rounded-lg bg-white">
+              <h2 className="text-2xl font-semibold mb-4">Recommended for you:</h2>
+              {/* Second Recommendation Card */}
+              <Card className="bg-white mb-4">
+                 <CardHeader>
+                     <CardTitle>Microsoft 365 Personal - Monthly</CardTitle>
+                  </CardHeader>
+                 <CardContent>
+                      <img src="https://via.placeholder.com/60" alt="Microsoft 365 icon" className="w-12 h-12 my-4" />
+                 </CardContent>
+                 <CardFooter>
+                 <div className="flex justify-between items-end">
+                  <p className="text-xl font-bold">R107pm</p>
+                  <div className="text-right">
+                    <p className="text-xs text-gray-400">Terms and conditions apply</p>
+                    <Button variant="outline" >
+                      Order Now
+                    </Button>
+                  </div>
+                </div>
+                 </CardFooter>
+               </Card>
+
+              <Card className="bg-white">
+                 <CardHeader>
+                     <CardTitle>Microsoft 365 Personal - Monthly</CardTitle>
+                  </CardHeader>
+                 <CardContent>
+                      <img src="https://via.placeholder.com/60" alt="Microsoft 365 icon" className="w-12 h-12 my-4" />
+                 </CardContent>
+                 <CardFooter>
+                 <div className="flex justify-between items-end">
+                  <p className="text-xl font-bold">R107pm</p>
+                  <div className="text-right">
+                    <p className="text-xs text-gray-400">Terms and conditions apply</p>
+                    <Button variant="outline" >
+                      Order Now
+                    </Button>
+                  </div>
+                </div>
+                 </CardFooter>
+               </Card>
+            </Card>
+          </Card>
+        );
+      })}
     </div>
   );
-  
 };
+  export default ProductPage;
 
-export default ServiceAccountDetails;
 
- 
