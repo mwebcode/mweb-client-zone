@@ -29,6 +29,7 @@ const UserProfiles: React.FC = () => {
                 sectionId='corporate-user-management'
                 bgColor='bg-mwBlueGrey-25 '
                 padding='px-4 py-14 md:px-20 md:py-18 desktop:px-[182px] desktop:py-24'
+
             >
                 <div className="w-full max-w-[1024px] mx-auto items-center">
                     <button className="back-button mb-8 text-[#255D7E]" onClick={() => {}}>Back to My Service Accounts</button>
