@@ -7,17 +7,18 @@ import {
 import {columns, IPayment} from "./columns"
 import {DataTable} from "./data-table"
 import MwebSliceContainer from "@/components/MwebSliceContainer";
-import {ServiceAccount} from "@/app/my-service-accounts/columns";
 import React, {useEffect, useState} from "react";
-import {getCustomerAccount} from "@/app/services/corporateUserManagementService";
 
-const date = new Date();
-const options = { year: 'numeric', month: 'short', day: 'numeric' };
+const formatDate = (dateStr: string): string => {
+    const date = new Date(dateStr);
+    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short', year: 'numeric' };
+    return date.toLocaleDateString('en-GB', options).replace(',', '');
+};
 
 function getSelfAsUser(): CorporateUser | null {
     const  customerAccount = MockedCustomerAccountData;
     const customerAccountLite = MockedCustomerAccountLite;
-    const formattedDate = new Intl.DateTimeFormat('en-US', options as any).format(date);
+    const formattedDate = formatDate(customerAccount.createDate);
     if (customerAccountLite && customerAccountLite?.serviceAccountCount > 0) {
         const selfUser: CorporateUser = {
             accountId: customerAccount.accountNumber,
