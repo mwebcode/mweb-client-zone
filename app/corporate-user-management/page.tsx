@@ -9,6 +9,7 @@ import {DataTable} from "./data-table"
 import MwebSliceContainer from "@/components/MwebSliceContainer";
 import {ServiceAccount} from "@/app/my-service-accounts/columns";
 import React, {useEffect, useState} from "react";
+import {getCustomerAccount} from "@/app/services/corporateUserManagementService";
 
 const date = new Date();
 const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -49,12 +50,10 @@ const selfUser: any = getSelfAsUser();
 async function getData(): Promise<IPayment[]> {
     return payments;
 }
-const DemoPage: React.FC = () => {
+const CorporateUserManagementPage: React.FC = () => {
     getSelfAsUser();
-    const [selectedAccount, setSelectedAccount] = useState<any | null>(null); // Need to change from any to use the ServiceAccount Interface
     const handleRowSelect = (row: any) => {
-        setSelectedAccount(row); // Update the selected account state
-        console.log(row);
+        // getCustomerAccount(row).then(r => r)
     };
     const [data, setData] = useState<any[]>([]);
     useEffect(() => {
@@ -79,4 +78,4 @@ const DemoPage: React.FC = () => {
         </MwebSliceContainer>
     )
 }
-export default DemoPage;
+export default CorporateUserManagementPage;
