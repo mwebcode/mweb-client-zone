@@ -1,23 +1,5 @@
-<<<<<<< HEAD
-import Image from "next/image";
-import { Button } from "@/components/ui/button"
-import ServiceAccountPage from "./my-service-accounts/page";
-import ServiceAccounts from "./view-account/view-account-page";
-=======
->>>>>>> dev
-
-
-
 export default function Home() {
   return (
-<<<<<<< HEAD
-    
-      <>
-          {/* Render the DemoPage which contains the table */}
-        <ServiceAccountPage />
-        {/* {DemoPage} */}
-        </>
-=======
     <>
        <div className=''>
            <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-100 to-white">
@@ -28,7 +10,6 @@ export default function Home() {
            </div>
        </div>
     </>
->>>>>>> dev
     
   );
 }
