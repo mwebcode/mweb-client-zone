@@ -10,7 +10,6 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -140,59 +139,109 @@ export function DataTable<TData extends Record<string, any>, TValue>({
   };
 
   return (
-    <div className="w-full max-w-[1024px] mx-auto items-center">
+    <div className="w-full max-w-[1024px] mx-auto px-4">
       <div className="flex flex-col sm:flex-row items-center justify-between py-4 gap-4">
-        <p className="service-account-title font-bold">MY SERVICE ACCOUNT</p>
+        <p className="service-account-title font-bold text-xl">MY SERVICE ACCOUNT</p>
         <Input
           placeholder="Search"
           value={globalFilter}
           onChange={(event) => setGlobalFilter(event.target.value)}
-          className="max-w-sm"
+          className="max-w-sm w-full"
         />
       </div>
-      <p className="caption mt-2">Search by any column.</p>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map(headerGroup => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map(header => (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {paginatedData.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow 
-                  key={row.id} 
-                  onClick={() => handleRowClick(row.original)} // Row click handler
-                >
-                  {row.getVisibleCells().map((cell: Cell<TData, TValue>) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
+      <p className="caption mt-2 text-sm text-gray-600">Search by any column.</p>
+
+      <div className="rounded-md border overflow-x-auto">
+        <div className="lg:hidden">
+          {paginatedData.length ? (
+            table.getRowModel()?.rows.map((row) => (
+              <div key={row.id} className="card mb-4 bg-white rounded-md shadow-md border p-4 cursor-pointer" onClick={() => handleRowClick(row.original)}>
+                {row.getVisibleCells().map((cell) => {
+  const column = table.getColumn(cell.column.id); // Get the column definition
+
+  // Check if the column exists
+  if (!column) {
+    return null; // Handle the case if the column is not found
+  }
+
+  // Get the header object for the cell
+  const header = table.getHeaderGroups().flatMap(hg => hg.headers).find(h => h.column.id === cell.column.id);
+
+  // Construct the correct header context if the header is found
+  if (header) {
+    const headerContext = {
+      header, // Pass the header object
+      column, // Pass the column
+      table, // Include the table instance
+    };
+
+    return (
+      <div key={cell.id} className="flex justify-between py-2">
+        <span className="font-light">
+          {flexRender(header.column.columnDef.header, headerContext)} {/* Correctly render the header */}
+        </span>
+        <span className='font-black'>
+          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+        </span>
+      </div>
+    );
+  }
+
+  return null; // In case no header is found
+})}
+
+
+
+              </div>
+            ))
+          ) : (
+            <div className="text-center h-24">No results.</div>
+          )}
+        </div>
+
+        <div className="hidden lg:block">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map(headerGroup => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map(header => (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                    </TableHead>
                   ))}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {paginatedData.length ? (
+                table.getRowModel()?.rows.map((row) => (
+                  <TableRow 
+                    key={row.id} 
+                    onClick={() => handleRowClick(row.original)} // Row click handler
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </div>
-  
-      <div className="flex items-center justify-between py-4">
-        <p>Items Per Page:</p>
+
+      <div className="flex flex-col sm:flex-row items-center justify-between py-4 mt-4">
+        <p className="text-sm">Items Per Page:</p>
         <Select onValueChange={(value) => handleItemsPerPageChange(Number(value))}>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-full sm:w-[180px] mt-2 sm:mt-0">
             <SelectValue placeholder={itemsPerPage.toString()} />
           </SelectTrigger>
           <SelectContent>
@@ -202,7 +251,7 @@ export function DataTable<TData extends Record<string, any>, TValue>({
           </SelectContent>
         </Select>
       </div>
-  
+
       <Pagination>
         <PaginationContent>
           <PaginationItem>

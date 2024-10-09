@@ -20,6 +20,7 @@ const ServiceAccountPage: React.FC = () => {
     const fetchData = async () => {
       const result = await getData();
       setData(result);
+      console.log('data :', result)
       setLoading(false);
     };
 
@@ -45,6 +46,7 @@ const ServiceAccountPage: React.FC = () => {
         <ServiceAccountDetails account={selectedAccount} onBack={handleBack} />
       ) : (
         <DataTable columns={columns} data={data} onRowSelect={handleRowSelect} />
+       
       )}
     </div>
   );

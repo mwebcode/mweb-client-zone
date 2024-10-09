@@ -42,6 +42,7 @@ import {
   LinearScale,
   Legend,
 } from "chart.js";
+import { Badge } from '@/components/ui/badge';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Legend);
 
@@ -244,6 +245,7 @@ interface MailboxData {
   status: any[];
 }
 
+
 const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, onBack }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDialogOpen1, setIsDialogOpen1] = useState(false);
@@ -388,7 +390,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
             .catch((error) => console.error('Error fetching the JSON:', error));
     }, []);
 
-  const handleToggleAccordion = (serviceId: number | null) => {
+  const viewUsageDataWithAccordion = (serviceId: number | null) => {
     setExpandedServiceId(prevId => (prevId === serviceId ? null : serviceId));
   };
 
@@ -412,11 +414,11 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
     setFriendlyName(account.customerFriendlyName);
     setIsEditing(false);
   };
-  const handleIconClick1 = () => {
+  const viewServiceActionActivationDialog = () => {
     setIsDialogOpen1(true);
   };
 
-  const handleIconClickAction = () => {
+  const viewServiceSettingsDialog = () => {
     console.log('handleIconClickAction triggered');
     setIsDialogOpenAction(true);
   };
@@ -427,7 +429,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
   };
 
 
-  const filteredServices = account.services.filter(service =>
+  const servicesTobeDisplayed = account.services.filter(service =>
     ![566, 4, 138, 50].includes(service.serviceTypeId)
   );
 
@@ -521,7 +523,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
           <h3>Contracts</h3>
           {account.contracts.map((contract) => (
             <div key={contract.id} className="contract-row">
-              <span className="status-label">{contract.status}</span>
+              <Badge variant="outline">{contract.status}</Badge>
               <span className="contract-description">{contract.displayName}</span>
               <span className="contract-price">R{contract.activeRate} PM</span>
             </div>
@@ -534,12 +536,13 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
             <thead>
             </thead>
             <tbody>
-              {filteredServices.length ? (
-                filteredServices.map((service) => (
+              {servicesTobeDisplayed.length ? (
+                servicesTobeDisplayed.map((service) => (
                   <React.Fragment key={service.id}>
                     <tr>
                       <td>
-                        <span className="status-label">{service.status}</span>
+                      <Badge variant="outline">{service.status}</Badge>
+                        {/* <span className="status-label">{service.status}</span> */}
                       </td>
                       <td>{service.name}</td>
                       <td>{service.crm1 || 'N/A'}</td>
@@ -571,7 +574,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                           <FontAwesomeIcon
                             icon={faChartColumn}
                             size="lg"
-                            onClick={() => handleToggleAccordion(service.id)}
+                            onClick={() => viewUsageDataWithAccordion(service.id)}
                             style={{
                               cursor: 'pointer',
                               color: '#000',
@@ -593,7 +596,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                                   hasServiceActions: service.hasServiceActions,
                                   hasUsageData: service.hasUsageData,
                                 });
-                                handleIconClickAction();
+                                viewServiceSettingsDialog();
                               }}
                               style={{
                                 cursor: 'pointer',
@@ -613,7 +616,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                                     hasUsageData: service.hasUsageData,
                                   }
                                 );
-                                handleIconClick1();
+                                viewServiceActionActivationDialog();
                               }}
                               style={{
                                 cursor: 'pointer',
@@ -958,7 +961,6 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
         </DialogContent>
       </Dialog>
     </div>
-
   );
   
 };
