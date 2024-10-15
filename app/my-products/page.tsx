@@ -596,17 +596,7 @@ interface MailboxData {
            {`R${account.contracts[0]?.activeRate} PM`}
         </p>
 
-        <Button variant="outline" onClick={() => router.push('/my-service-accounts')}  className="mr-4">
-         Get Faster Fibre
-        </Button>
-        <Button variant="outline" onClick={() => router.push('/my-service-accounts')}  className="mr-4">
-         Add New Product
-        </Button>
-        {account.contracts[0]?.canChangeProduct &&(
-        <Button variant="outline" onClick={() => router.push('/my-service-accounts')}  className="mb-4">
-         Change product
-        </Button>
-        )}
+        
 
 {servicesTobeDisplayed.length > 0 ? (
       <div className="w-full">

@@ -58,13 +58,7 @@
     margin-bottom: 10px;
   }
   
-  .status-label {
-    background-color: #28a745;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-  }
+  
   
   .contract-description {
     flex: 1;
