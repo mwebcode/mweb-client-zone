@@ -17,6 +17,7 @@ const formatDate = (dateStr: string): string => {
 
 function getSelfAsUser(): CorporateUser | null {
     const  customerAccount = MockedCustomerAccountData;
+    console.log('UserProfile:::', customerAccount.userProfile);
     const customerAccountLite = MockedCustomerAccountLite;
     const formattedDate = formatDate(customerAccount.createDate);
     if (customerAccountLite && customerAccountLite?.serviceAccountCount > 0) {
