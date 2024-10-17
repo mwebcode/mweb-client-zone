@@ -175,10 +175,10 @@ interface Product {
   // Function to render filter buttons
   const renderFilterButtons = () => {
     return (
-        <Card className="bg-white max-w-[1024px] container mx-auto p-4 mb-9">
+        <Card className=" bg-gradient-to-b from-blue-100 to-white bg-white max-w-[1024px] container mx-auto p-4 mb-9">
         <div className="flex space-x-4">
           <DropdownMenu>
-            <DropdownMenuTrigger className="border border-gray-300 rounded-md px-4 py-2 bg-white text-gray-700 hover:bg-gray-100 transition duration-200 ease-in-out shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            <DropdownMenuTrigger className="border border-gray-300 rounded-md px-4 py-2 bg-[#255d7e]  text-white hover:bg-gray-100 transition duration-200 ease-in-out shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                Speed
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -201,7 +201,7 @@ interface Product {
           </DropdownMenu>
   
           <DropdownMenu>
-            <DropdownMenuTrigger className="border border-gray-300 rounded-md px-4 py-2 bg-white text-gray-700 hover:bg-gray-100 transition duration-200 ease-in-out shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            <DropdownMenuTrigger className="border border-gray-300 rounded-md px-4 py-2 bg-[#255d7e] text-white hover:bg-gray-100 transition duration-200 ease-in-out shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
               <FaMoneyBillWave className="inline-block mr-2" /> Price
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -274,7 +274,7 @@ interface Product {
   };
 
   return (
-    <div className="max-w-[1024px] mx-auto items-center mt-4">
+    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-100 to-white">
       {renderFilterButtons()}
       {renderFilteredProducts()}
     </div>

@@ -662,14 +662,14 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
           {account.serviceAccountPrimaryContactDisplayName}
         </div>
 
-        <Button variant="outline" onClick={() => router.push('/my-service-accounts')}  className="mr-4">
+        <Button className='mr-4 bg-[#255d7e] text-white' variant="outline" onClick={() => router.push('/my-service-accounts')} >
          Get Faster Fibre
         </Button>
-        <Button variant="outline" onClick={() => router.push('/my-service-accounts')}  className="mr-4">
+        <Button className='mr-4 bg-[#255d7e] text-white' variant="outline" onClick={() => router.push('/my-service-accounts')}>
          Add New Product
         </Button>
         {account.contracts[0]?.canChangeProduct &&(
-        <Button variant="outline" onClick={() => openChangeProductDialog()}  className="mb-4">
+        <Button className='mb-4 bg-[#255d7e] text-white' variant="outline" onClick={() => openChangeProductDialog()}>
          Change product
         </Button>
         )}
@@ -795,15 +795,15 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
 
                               {/* Time Range Buttons */}
                           <div className="flex space-x-2">
-                               <Button variant="outline">30 DAYS</Button>
-                               <Button variant="outline" onClick={handleFetchTwelveMonthsData} className="mr-4">
+                               <Button className='bg-[#255d7e] text-white' variant="outline">30 DAYS</Button>
+                               <Button className='mr-4 bg-[#255d7e] text-white' variant="outline" onClick={handleFetchTwelveMonthsData} >
                                   12 MONTHS
                                </Button>
                           </div>
 
                               {/* Dropdown */}
                               <Select onValueChange={handleMonthChange} defaultValue={selectedMonth}>
-                                   <SelectTrigger className="w-[180px]">
+                                   <SelectTrigger className="bg-[#255d7e] text-white w-[180px]">
                                           <SelectValue placeholder="Select Month" />
                                    </SelectTrigger>
                                    <SelectContent>
@@ -820,7 +820,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                           <div className="chart-container">
                             <Bar data={chartData} options={options} />
                           </div>
-                          <Button variant="outline" onClick={() => router.push('/my-usage')}  className="mb-4">
+                          <Button className='mb-4 bg-[#255d7e] text-white' variant="outline" onClick={() => router.push('/my-usage')}>
                             View Session
                           </Button>
                         </td>
@@ -1028,10 +1028,10 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
             </Accordion>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={closeDialog}>
+            <Button className='bg-[#255d7e] text-white' variant="outline" onClick={closeDialog}>
               Close
             </Button>
-            <Button variant="outline">Save</Button>
+            <Button className='bg-[#255d7e] text-white' variant="outline">Save</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -1050,11 +1050,11 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
               Activate your free mailbox as it has not been created or was
               removed due to non-use
             </DialogDescription>
-            <Button variant="outline">Activate Mailbox</Button>
+            <Button className='bg-[#255d7e] text-white' variant="outline">Activate Mailbox</Button>
           </DialogHeader>
           <DialogFooter>
             <Button
-              variant="outline"
+             className='bg-[#255d7e] text-white' variant="outline"
               onClick={() => setIsDialogOpen1(false)}
             >
               Close
@@ -1113,12 +1113,12 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
           </DialogHeader>
           <DialogFooter>
             <Button
-              variant="outline"
+              className='bg-[#255d7e] text-white' variant="outline"
               onClick={() => setIsDialogOpenAction(false)}
             >
               Close
             </Button>
-            <Button variant="outline">Save</Button>
+            <Button className='bg-[#255d7e] text-white' variant="outline">Save</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -1134,13 +1134,13 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
             <DialogTitle>
               I want to :
             </DialogTitle>
-            <Button variant="outline">Upgrade Products</Button>
-            <Button variant="outline">Downgrage product</Button>
-            <Button variant="outline">Apply Promotion Voucher</Button>
+            <Button  className='bg-[#255d7e] text-white' variant="outline" onClick={() => router.push('/change-product')}>Upgrade Products</Button>
+            <Button  className='bg-[#255d7e] text-white' variant="outline">Downgrage product</Button>
+            <Button  className='bg-[#255d7e] text-white' variant="outline">Apply Promotion Voucher</Button>
           </DialogHeader>
           <DialogFooter>
             <Button
-              variant="outline"
+              className='bg-[#255d7e] text-white' variant="outline"
               onClick={() => setIsDialogOpen1(false)}
             >
               Close

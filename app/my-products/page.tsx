@@ -481,21 +481,21 @@ interface MailboxData {
         <span className="text-blue-800 font-semibold flex items-center">
           <i className="fas fa-filter mr-2"></i> Filter my products:
         </span>
-        <Button variant="outline" onClick={() => router.push('/my-products/emails-table')}>
+        <Button className='bg-[#255d7e] text-white' variant="outline" onClick={() => router.push('/my-products/emails-table')}>
         <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '8px' }} /> Email
         </Button>
-        <Button variant="outline" onClick={handleFibreFilter}>
+        <Button className='bg-[#255d7e] text-white' variant="outline" onClick={handleFibreFilter}>
         <FontAwesomeIcon icon={faWifi} style={{ marginRight: '8px' }} />
         Fibre
         </Button>
-        <Button variant="outline" onClick={handleOtherFilter}>
+        <Button className='bg-[#255d7e] text-white' variant="outline" onClick={handleOtherFilter}>
         <FontAwesomeIcon icon={faShield} style={{ marginRight: '8px' }} />
         Other
       </Button>
-        <Button variant="outline" onClick={handleShowAll}>
+        <Button className='bg-[#255d7e] text-white' variant="outline" onClick={handleShowAll}>
         Show All
         </Button>
-        <Button variant="outline" onClick={() => router.push('/my-service-accounts')}>
+        <Button className='bg-[#255d7e] text-white' variant="outline" onClick={() => router.push('/my-service-accounts')}>
         <FontAwesomeIcon icon={faList} style={{ marginRight: '8px' }}/> My Service Accounts
         </Button>
       </Card>
@@ -1018,7 +1018,7 @@ interface MailboxData {
           </DialogHeader>
           <DialogFooter>
             <Button
-              variant="outline"
+             className='bg-[#255d7e] text-white' variant="outline"
               onClick={() => setIsDialogOpenAction(false)}
             >
               Close
@@ -1044,7 +1044,7 @@ interface MailboxData {
                   <p className="text-xl font-bold">R107pm</p>
                   <div className="text-right">
                     <p className="text-xs text-gray-400">Terms and conditions apply</p>
-                    <Button variant="outline" >
+                    <Button className='bg-[#255d7e] text-white' variant="outline">
                       Order Now
                     </Button>
                   </div>
@@ -1064,7 +1064,7 @@ interface MailboxData {
                   <p className="text-xl font-bold">R107pm</p>
                   <div className="text-right">
                     <p className="text-xs text-gray-400">Terms and conditions apply</p>
-                    <Button variant="outline" >
+                    <Button className='bg-[#255d7e] text-white' variant="outline" >
                       Order Now
                     </Button>
                   </div>
