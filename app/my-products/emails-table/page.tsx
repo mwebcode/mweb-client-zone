@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { ServiceAccount, columns } from "./columns";
 import { DataTable } from "./data-table";
-import ServiceAccountDetails from "../view-account/view-account-page";
+import ServiceAccountDetails from "@/app/view-account/view-account-page";
 
 
 async function getData(): Promise<ServiceAccount[]> {
@@ -12,15 +12,21 @@ async function getData(): Promise<ServiceAccount[]> {
     return serviceAccounts;
 }
 
-const ServiceAccountPage: React.FC = () => {
+const EmailsPagePage: React.FC = () => {
   const [data, setData] = useState<ServiceAccount[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedAccount, setSelectedAccount] = useState<any | null>(null); 
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await getData();
-      setData(result);
-      console.log('data :', result)
+
+      const accountWithoutEmail = result.filter(account =>
+        account.contracts.some(contract =>
+            contract.servicesInfo.some(serviceInfo => serviceInfo)
+        )
+      )
+      setData(accountWithoutEmail);
       setLoading(false);
     };
 
@@ -31,25 +37,15 @@ const ServiceAccountPage: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  const handleRowSelect = (row: ServiceAccount) => {
-    setSelectedAccount(row); 
-    console.log(row);
-  };
-
-  const handleBack = () => {
-    setSelectedAccount(null); 
-  };
+ 
 
   return (
     <div className="container mx-auto py-10">
-      {selectedAccount ? (
-        <ServiceAccountDetails account={selectedAccount} onBack={handleBack} />
-      ) : (
-        <DataTable columns={columns} data={data} onRowSelect={handleRowSelect} />
-       
-      )}
+      <DataTable columns={columns} data={data} onRowSelect={function (row: ServiceAccount): void {
+              throw new Error("Function not implemented.");
+          } } />
     </div>
   );
 };
 
-export default ServiceAccountPage;
+export default EmailsPagePage;
