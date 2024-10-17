@@ -98,6 +98,8 @@ const UserProfiles: React.FC = () => {
             [index]: value,
         }));
     };
+
+
     const handleHomeNumberInputChange = (index:number, value:string) => {
         setHomeNumbers((prev:any) => ({
             ...prev,
