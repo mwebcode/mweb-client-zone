@@ -65,6 +65,7 @@ const UserProfiles: React.FC = () => {
 
 
     // Defining state variables for each input
+
     const [workNumber, setWorkNumber] = useState('');
     const [homeNumber, setHomeNumber] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
