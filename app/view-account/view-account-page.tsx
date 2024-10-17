@@ -381,6 +381,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
         ],
       });
     }
+    
   }, [usageData]);
 
   const options = {
