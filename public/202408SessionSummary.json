@@ -1,0 +1,1373 @@
+{
+    "responseBody": {
+        "uncapped": true,
+        "totalOffPeakUp": 11199.822492599487,
+        "usage": [
+            {
+                "date": "20240801",
+                "totalOffPeak": 11120.434761047363,
+                "peakUp": 1359.3865184783936,
+                "total": 27275.957724571228,
+                "totalUp": 1713.076771736145,
+                "peakDown": 14796.136445045471,
+                "totalDown": 25562.880952835083,
+                "totalPeak": 16155.522963523865,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 353.69025325775146,
+                "offPeakDown": 10766.744507789612,
+                "events": []
+            },
+            {
+                "date": "20240802",
+                "totalOffPeak": 10823.626316070557,
+                "peakUp": 1379.0497198104858,
+                "total": 25534.063241004944,
+                "totalUp": 1627.46053981781,
+                "peakDown": 13331.387205123901,
+                "totalDown": 23906.602701187134,
+                "totalPeak": 14710.436924934387,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 248.41082000732422,
+                "offPeakDown": 10575.215496063232,
+                "events": []
+            },
+            {
+                "date": "20240803",
+                "totalOffPeak": 4291.884016036987,
+                "peakUp": 665.7888784408569,
+                "total": 22345.31847667694,
+                "totalUp": 881.2421760559082,
+                "peakDown": 17387.645582199097,
+                "totalDown": 21464.076300621033,
+                "totalPeak": 18053.434460639954,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 215.45329761505127,
+                "offPeakDown": 4076.430718421936,
+                "events": []
+            },
+            {
+                "date": "20240804",
+                "totalOffPeak": 10695.299479484558,
+                "peakUp": 1707.202826499939,
+                "total": 43477.30456352234,
+                "totalUp": 1952.540020942688,
+                "peakDown": 31074.80225753784,
+                "totalDown": 41524.76454257965,
+                "totalPeak": 32782.00508403778,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 245.33719444274902,
+                "offPeakDown": 10449.962285041809,
+                "events": []
+            },
+            {
+                "date": "20240805",
+                "totalOffPeak": 5800.644700050354,
+                "peakUp": 1387.0052223205566,
+                "total": 22095.00519180298,
+                "totalUp": 1617.4509296417236,
+                "peakDown": 14907.355269432068,
+                "totalDown": 20477.554262161255,
+                "totalPeak": 16294.360491752625,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 230.445707321167,
+                "offPeakDown": 5570.198992729187,
+                "events": []
+            },
+            {
+                "date": "20240806",
+                "totalOffPeak": 5111.21092414856,
+                "peakUp": 1340.651662826538,
+                "total": 29569.02142715454,
+                "totalUp": 1636.5566864013672,
+                "peakDown": 23117.158840179443,
+                "totalDown": 27932.464740753174,
+                "totalPeak": 24457.81050300598,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 295.9050235748291,
+                "offPeakDown": 4815.3059005737305,
+                "events": []
+            },
+            {
+                "date": "20240807",
+                "totalOffPeak": 24392.546089172363,
+                "peakUp": 653.6833028793335,
+                "total": 38264.07670593262,
+                "totalUp": 1197.2507791519165,
+                "peakDown": 13217.84731388092,
+                "totalDown": 37066.8259267807,
+                "totalPeak": 13871.530616760254,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 543.567476272583,
+                "offPeakDown": 23848.97861289978,
+                "events": []
+            },
+            {
+                "date": "20240808",
+                "totalOffPeak": 4699.258372306824,
+                "peakUp": 953.3234758377075,
+                "total": 21909.27404308319,
+                "totalUp": 1088.4819793701172,
+                "peakDown": 16256.69219493866,
+                "totalDown": 20820.792063713074,
+                "totalPeak": 17210.015670776367,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 135.15850353240967,
+                "offPeakDown": 4564.099868774414,
+                "events": []
+            },
+            {
+                "date": "20240809",
+                "totalOffPeak": 13196.622714042664,
+                "peakUp": 761.1471548080444,
+                "total": 36656.61618423462,
+                "totalUp": 1336.0084381103516,
+                "peakDown": 22698.84631538391,
+                "totalDown": 35320.60774612427,
+                "totalPeak": 23459.993470191956,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 574.8612833023071,
+                "offPeakDown": 12621.761430740356,
+                "events": []
+            },
+            {
+                "date": "20240810",
+                "totalOffPeak": 10025.127447128296,
+                "peakUp": 1188.4191751480103,
+                "total": 34924.03642082214,
+                "totalUp": 1446.1815376281738,
+                "peakDown": 23710.489798545837,
+                "totalDown": 33477.85488319397,
+                "totalPeak": 24898.908973693848,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 257.7623624801636,
+                "offPeakDown": 9767.365084648132,
+                "events": []
+            },
+            {
+                "date": "20240811",
+                "totalOffPeak": 8487.455483436584,
+                "peakUp": 1135.9616193771362,
+                "total": 29146.462564468384,
+                "totalUp": 1526.4515190124512,
+                "peakDown": 19523.045461654663,
+                "totalDown": 27620.011045455933,
+                "totalPeak": 20659.0070810318,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 390.48989963531494,
+                "offPeakDown": 8096.9655838012695,
+                "events": []
+            },
+            {
+                "date": "20240812",
+                "totalOffPeak": 10554.92235660553,
+                "peakUp": 706.5008544921875,
+                "total": 28231.5681476593,
+                "totalUp": 1014.2804698944092,
+                "peakDown": 16970.144936561584,
+                "totalDown": 27217.287677764893,
+                "totalPeak": 17676.645791053772,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 307.7796154022217,
+                "offPeakDown": 10247.142741203308,
+                "events": []
+            },
+            {
+                "date": "20240813",
+                "totalOffPeak": 7875.596569061279,
+                "peakUp": 1369.6458177566528,
+                "total": 25864.492215156555,
+                "totalUp": 1544.4422883987427,
+                "peakDown": 16619.249828338623,
+                "totalDown": 24320.049926757812,
+                "totalPeak": 17988.895646095276,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 174.79647064208984,
+                "offPeakDown": 7700.800098419189,
+                "events": []
+            },
+            {
+                "date": "20240814",
+                "totalOffPeak": 16345.652079582214,
+                "peakUp": 530.7037439346313,
+                "total": 26991.947618484497,
+                "totalUp": 909.6284122467041,
+                "peakDown": 10115.591794967651,
+                "totalDown": 26082.319206237793,
+                "totalPeak": 10646.295538902283,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 378.92466831207275,
+                "offPeakDown": 15966.727411270142,
+                "events": []
+            },
+            {
+                "date": "20240815",
+                "totalOffPeak": 9599.100108146667,
+                "peakUp": 891.1651468276978,
+                "total": 26157.52185153961,
+                "totalUp": 1351.0697031021118,
+                "peakDown": 15667.256596565247,
+                "totalDown": 24806.4521484375,
+                "totalPeak": 16558.421743392944,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 459.90455627441406,
+                "offPeakDown": 9139.195551872253,
+                "events": []
+            },
+            {
+                "date": "20240816",
+                "totalOffPeak": 11274.24460220337,
+                "peakUp": 4241.687886238098,
+                "total": 37020.70948219299,
+                "totalUp": 4580.034551620483,
+                "peakDown": 21504.776993751526,
+                "totalDown": 32440.67493057251,
+                "totalPeak": 25746.464879989624,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 338.34666538238525,
+                "offPeakDown": 10935.897936820984,
+                "events": []
+            },
+            {
+                "date": "20240817",
+                "totalOffPeak": 7361.047139167786,
+                "peakUp": 1492.7519388198853,
+                "total": 52987.718874931335,
+                "totalUp": 1826.7735919952393,
+                "peakDown": 44133.919796943665,
+                "totalDown": 51160.945282936096,
+                "totalPeak": 45626.67173576355,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 334.021653175354,
+                "offPeakDown": 7027.025485992432,
+                "events": []
+            },
+            {
+                "date": "20240818",
+                "totalOffPeak": 8209.573464393616,
+                "peakUp": 1069.62233543396,
+                "total": 40909.370074272156,
+                "totalUp": 1534.157802581787,
+                "peakDown": 31630.17427444458,
+                "totalDown": 39375.21227169037,
+                "totalPeak": 32699.79660987854,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 464.53546714782715,
+                "offPeakDown": 7745.037997245789,
+                "events": []
+            },
+            {
+                "date": "20240819",
+                "totalOffPeak": 8822.317954063416,
+                "peakUp": 1896.9364919662476,
+                "total": 47737.28971672058,
+                "totalUp": 2179.0857677459717,
+                "peakDown": 37018.03527069092,
+                "totalDown": 45558.20394897461,
+                "totalPeak": 38914.971762657166,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 282.1492757797241,
+                "offPeakDown": 8540.168678283691,
+                "events": []
+            },
+            {
+                "date": "20240820",
+                "totalOffPeak": 9930.326402664185,
+                "peakUp": 807.1213159561157,
+                "total": 27227.685465812683,
+                "totalUp": 1061.0207424163818,
+                "peakDown": 16490.237747192383,
+                "totalDown": 26166.6647233963,
+                "totalPeak": 17297.3590631485,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 253.8994264602661,
+                "offPeakDown": 9676.426976203918,
+                "events": []
+            },
+            {
+                "date": "20240821",
+                "totalOffPeak": 8171.201392173767,
+                "peakUp": 977.8929319381714,
+                "total": 32830.19579029083,
+                "totalUp": 1324.678526878357,
+                "peakDown": 23681.101466178894,
+                "totalDown": 31505.517263412476,
+                "totalPeak": 24658.994398117065,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 346.78559494018555,
+                "offPeakDown": 7824.4157972335815,
+                "events": []
+            },
+            {
+                "date": "20240822",
+                "totalOffPeak": 11202.969994544983,
+                "peakUp": 1997.8072271347046,
+                "total": 67067.72585105896,
+                "totalUp": 2327.74298286438,
+                "peakDown": 53866.94862937927,
+                "totalDown": 64739.98286819458,
+                "totalPeak": 55864.75585651398,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 329.9357557296753,
+                "offPeakDown": 10873.034238815308,
+                "events": []
+            },
+            {
+                "date": "20240823",
+                "totalOffPeak": 13732.202354431152,
+                "peakUp": 1175.9942979812622,
+                "total": 33623.49286651611,
+                "totalUp": 1530.6983737945557,
+                "peakDown": 18715.2962141037,
+                "totalDown": 32092.794492721558,
+                "totalPeak": 19891.29051208496,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 354.70407581329346,
+                "offPeakDown": 13377.498278617859,
+                "events": []
+            },
+            {
+                "date": "20240824",
+                "totalOffPeak": 14846.552458763123,
+                "peakUp": 1530.3834285736084,
+                "total": 66251.71328544617,
+                "totalUp": 1861.536268234253,
+                "peakDown": 49874.777398109436,
+                "totalDown": 64390.177017211914,
+                "totalPeak": 51405.160826683044,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 331.15283966064453,
+                "offPeakDown": 14515.399619102478,
+                "events": []
+            },
+            {
+                "date": "20240825",
+                "totalOffPeak": 8058.763865470886,
+                "peakUp": 1286.3032312393188,
+                "total": 51195.30551338196,
+                "totalUp": 1571.941351890564,
+                "peakDown": 41850.23841667175,
+                "totalDown": 49623.364161491394,
+                "totalPeak": 43136.54164791107,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 285.6381206512451,
+                "offPeakDown": 7773.125744819641,
+                "events": []
+            },
+            {
+                "date": "20240826",
+                "totalOffPeak": 5661.976315498352,
+                "peakUp": 1420.889229774475,
+                "total": 34903.95830821991,
+                "totalUp": 1692.8855752944946,
+                "peakDown": 27821.092762947083,
+                "totalDown": 33211.072732925415,
+                "totalPeak": 29241.981992721558,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 271.99634552001953,
+                "offPeakDown": 5389.9799699783325,
+                "events": []
+            },
+            {
+                "date": "20240827",
+                "totalOffPeak": 8093.7388162612915,
+                "peakUp": 1286.1028270721436,
+                "total": 40882.793825149536,
+                "totalUp": 1637.64945602417,
+                "peakDown": 31502.9521818161,
+                "totalDown": 39245.144369125366,
+                "totalPeak": 32789.055008888245,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 351.54662895202637,
+                "offPeakDown": 7742.192187309265,
+                "events": []
+            },
+            {
+                "date": "20240828",
+                "totalOffPeak": 8083.638006210327,
+                "peakUp": 1108.7718744277954,
+                "total": 47083.49018287659,
+                "totalUp": 1866.9572038650513,
+                "peakDown": 37891.080302238464,
+                "totalDown": 45216.532979011536,
+                "totalPeak": 38999.85217666626,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 758.1853294372559,
+                "offPeakDown": 7325.452676773071,
+                "events": []
+            },
+            {
+                "date": "20240829",
+                "totalOffPeak": 9299.246333122253,
+                "peakUp": 1882.8500671386719,
+                "total": 39662.75934123993,
+                "totalUp": 2386.4102840423584,
+                "peakDown": 28480.662940979004,
+                "totalDown": 37276.34905719757,
+                "totalPeak": 30363.513008117676,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 503.5602169036865,
+                "offPeakDown": 8795.686116218567,
+                "events": []
+            },
+            {
+                "date": "20240830",
+                "totalOffPeak": 13595.002025604248,
+                "peakUp": 1105.222635269165,
+                "total": 46470.518226623535,
+                "totalUp": 1794.2233238220215,
+                "peakDown": 31770.293565750122,
+                "totalDown": 44676.294902801514,
+                "totalPeak": 32875.51620101929,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 689.0006885528564,
+                "offPeakDown": 12906.001337051392,
+                "events": []
+            },
+            {
+                "date": "20240831",
+                "totalOffPeak": 8097.302825927734,
+                "peakUp": 1433.9729843139648,
+                "total": 53057.66647148132,
+                "totalUp": 1925.850260734558,
+                "peakDown": 43526.390661239624,
+                "totalDown": 51131.816210746765,
+                "totalPeak": 44960.36364555359,
+                "ratings": [
+                    {
+                        "ratingThreshold": 0,
+                        "level": "NORMAL",
+                        "ratingUsage": 0,
+                        "ratingPercentUsed": 0
+                    }
+                ],
+                "offPeakUp": 491.87727642059326,
+                "offPeakDown": 7605.425549507141,
+                "events": []
+            }
+        ],
+        "totalPeakUp": 40743.94582271576,
+        "totalup": 51943.76831531525,
+        "totalDown": 1105411.2913370132,
+        "totalPeak": 849895.5742855072,
+        "totalBooster": 0,
+        "end": "20240901",
+        "totalUsage": 1157355.0596523285,
+        "summaryBy": "day",
+        "isMobileDataService": false,
+        "totalOffPeakDown": 296259.6628742218,
+        "start": "20240801",
+        "totalBoosterDown": 0,
+        "rollingWindow": 0,
+        "rollingMaximumUsage": 0,
+        "serviceIdentifier": "53983050",
+        "totalOffPeak": 307459.4853668213,
+        "totalPeakDown": 809151.6284627914,
+        "usageUnits": "MB",
+        "service": "FIBRE SERVICE",
+        "hasNightTimeCap": true,
+        "totalBoosterUp": 0,
+        "username": "53983050"
+    },
+    "responseObject": {
+        "headers": {
+            "normalizedNames": {},
+            "lazyUpdate": null
+        },
+        "status": 200,
+        "statusText": "OK",
+        "url": "https://apigw.mwebaws.co.za/dev/baas/proxy/services/usage/53983050/564/202408?summary=day",
+        "ok": true,
+        "type": 4,
+        "body": {
+            "uncapped": true,
+            "totalOffPeakUp": 11199.822492599487,
+            "usage": [
+                {
+                    "date": "20240801",
+                    "totalOffPeak": 11120.434761047363,
+                    "peakUp": 1359.3865184783936,
+                    "total": 27275.957724571228,
+                    "totalUp": 1713.076771736145,
+                    "peakDown": 14796.136445045471,
+                    "totalDown": 25562.880952835083,
+                    "totalPeak": 16155.522963523865,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 353.69025325775146,
+                    "offPeakDown": 10766.744507789612,
+                    "events": []
+                },
+                {
+                    "date": "20240802",
+                    "totalOffPeak": 10823.626316070557,
+                    "peakUp": 1379.0497198104858,
+                    "total": 25534.063241004944,
+                    "totalUp": 1627.46053981781,
+                    "peakDown": 13331.387205123901,
+                    "totalDown": 23906.602701187134,
+                    "totalPeak": 14710.436924934387,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 248.41082000732422,
+                    "offPeakDown": 10575.215496063232,
+                    "events": []
+                },
+                {
+                    "date": "20240803",
+                    "totalOffPeak": 4291.884016036987,
+                    "peakUp": 665.7888784408569,
+                    "total": 22345.31847667694,
+                    "totalUp": 881.2421760559082,
+                    "peakDown": 17387.645582199097,
+                    "totalDown": 21464.076300621033,
+                    "totalPeak": 18053.434460639954,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 215.45329761505127,
+                    "offPeakDown": 4076.430718421936,
+                    "events": []
+                },
+                {
+                    "date": "20240804",
+                    "totalOffPeak": 10695.299479484558,
+                    "peakUp": 1707.202826499939,
+                    "total": 43477.30456352234,
+                    "totalUp": 1952.540020942688,
+                    "peakDown": 31074.80225753784,
+                    "totalDown": 41524.76454257965,
+                    "totalPeak": 32782.00508403778,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 245.33719444274902,
+                    "offPeakDown": 10449.962285041809,
+                    "events": []
+                },
+                {
+                    "date": "20240805",
+                    "totalOffPeak": 5800.644700050354,
+                    "peakUp": 1387.0052223205566,
+                    "total": 22095.00519180298,
+                    "totalUp": 1617.4509296417236,
+                    "peakDown": 14907.355269432068,
+                    "totalDown": 20477.554262161255,
+                    "totalPeak": 16294.360491752625,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 230.445707321167,
+                    "offPeakDown": 5570.198992729187,
+                    "events": []
+                },
+                {
+                    "date": "20240806",
+                    "totalOffPeak": 5111.21092414856,
+                    "peakUp": 1340.651662826538,
+                    "total": 29569.02142715454,
+                    "totalUp": 1636.5566864013672,
+                    "peakDown": 23117.158840179443,
+                    "totalDown": 27932.464740753174,
+                    "totalPeak": 24457.81050300598,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 295.9050235748291,
+                    "offPeakDown": 4815.3059005737305,
+                    "events": []
+                },
+                {
+                    "date": "20240807",
+                    "totalOffPeak": 24392.546089172363,
+                    "peakUp": 653.6833028793335,
+                    "total": 38264.07670593262,
+                    "totalUp": 1197.2507791519165,
+                    "peakDown": 13217.84731388092,
+                    "totalDown": 37066.8259267807,
+                    "totalPeak": 13871.530616760254,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 543.567476272583,
+                    "offPeakDown": 23848.97861289978,
+                    "events": []
+                },
+                {
+                    "date": "20240808",
+                    "totalOffPeak": 4699.258372306824,
+                    "peakUp": 953.3234758377075,
+                    "total": 21909.27404308319,
+                    "totalUp": 1088.4819793701172,
+                    "peakDown": 16256.69219493866,
+                    "totalDown": 20820.792063713074,
+                    "totalPeak": 17210.015670776367,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 135.15850353240967,
+                    "offPeakDown": 4564.099868774414,
+                    "events": []
+                },
+                {
+                    "date": "20240809",
+                    "totalOffPeak": 13196.622714042664,
+                    "peakUp": 761.1471548080444,
+                    "total": 36656.61618423462,
+                    "totalUp": 1336.0084381103516,
+                    "peakDown": 22698.84631538391,
+                    "totalDown": 35320.60774612427,
+                    "totalPeak": 23459.993470191956,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 574.8612833023071,
+                    "offPeakDown": 12621.761430740356,
+                    "events": []
+                },
+                {
+                    "date": "20240810",
+                    "totalOffPeak": 10025.127447128296,
+                    "peakUp": 1188.4191751480103,
+                    "total": 34924.03642082214,
+                    "totalUp": 1446.1815376281738,
+                    "peakDown": 23710.489798545837,
+                    "totalDown": 33477.85488319397,
+                    "totalPeak": 24898.908973693848,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 257.7623624801636,
+                    "offPeakDown": 9767.365084648132,
+                    "events": []
+                },
+                {
+                    "date": "20240811",
+                    "totalOffPeak": 8487.455483436584,
+                    "peakUp": 1135.9616193771362,
+                    "total": 29146.462564468384,
+                    "totalUp": 1526.4515190124512,
+                    "peakDown": 19523.045461654663,
+                    "totalDown": 27620.011045455933,
+                    "totalPeak": 20659.0070810318,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 390.48989963531494,
+                    "offPeakDown": 8096.9655838012695,
+                    "events": []
+                },
+                {
+                    "date": "20240812",
+                    "totalOffPeak": 10554.92235660553,
+                    "peakUp": 706.5008544921875,
+                    "total": 28231.5681476593,
+                    "totalUp": 1014.2804698944092,
+                    "peakDown": 16970.144936561584,
+                    "totalDown": 27217.287677764893,
+                    "totalPeak": 17676.645791053772,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 307.7796154022217,
+                    "offPeakDown": 10247.142741203308,
+                    "events": []
+                },
+                {
+                    "date": "20240813",
+                    "totalOffPeak": 7875.596569061279,
+                    "peakUp": 1369.6458177566528,
+                    "total": 25864.492215156555,
+                    "totalUp": 1544.4422883987427,
+                    "peakDown": 16619.249828338623,
+                    "totalDown": 24320.049926757812,
+                    "totalPeak": 17988.895646095276,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 174.79647064208984,
+                    "offPeakDown": 7700.800098419189,
+                    "events": []
+                },
+                {
+                    "date": "20240814",
+                    "totalOffPeak": 16345.652079582214,
+                    "peakUp": 530.7037439346313,
+                    "total": 26991.947618484497,
+                    "totalUp": 909.6284122467041,
+                    "peakDown": 10115.591794967651,
+                    "totalDown": 26082.319206237793,
+                    "totalPeak": 10646.295538902283,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 378.92466831207275,
+                    "offPeakDown": 15966.727411270142,
+                    "events": []
+                },
+                {
+                    "date": "20240815",
+                    "totalOffPeak": 9599.100108146667,
+                    "peakUp": 891.1651468276978,
+                    "total": 26157.52185153961,
+                    "totalUp": 1351.0697031021118,
+                    "peakDown": 15667.256596565247,
+                    "totalDown": 24806.4521484375,
+                    "totalPeak": 16558.421743392944,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 459.90455627441406,
+                    "offPeakDown": 9139.195551872253,
+                    "events": []
+                },
+                {
+                    "date": "20240816",
+                    "totalOffPeak": 11274.24460220337,
+                    "peakUp": 4241.687886238098,
+                    "total": 37020.70948219299,
+                    "totalUp": 4580.034551620483,
+                    "peakDown": 21504.776993751526,
+                    "totalDown": 32440.67493057251,
+                    "totalPeak": 25746.464879989624,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 338.34666538238525,
+                    "offPeakDown": 10935.897936820984,
+                    "events": []
+                },
+                {
+                    "date": "20240817",
+                    "totalOffPeak": 7361.047139167786,
+                    "peakUp": 1492.7519388198853,
+                    "total": 52987.718874931335,
+                    "totalUp": 1826.7735919952393,
+                    "peakDown": 44133.919796943665,
+                    "totalDown": 51160.945282936096,
+                    "totalPeak": 45626.67173576355,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 334.021653175354,
+                    "offPeakDown": 7027.025485992432,
+                    "events": []
+                },
+                {
+                    "date": "20240818",
+                    "totalOffPeak": 8209.573464393616,
+                    "peakUp": 1069.62233543396,
+                    "total": 40909.370074272156,
+                    "totalUp": 1534.157802581787,
+                    "peakDown": 31630.17427444458,
+                    "totalDown": 39375.21227169037,
+                    "totalPeak": 32699.79660987854,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 464.53546714782715,
+                    "offPeakDown": 7745.037997245789,
+                    "events": []
+                },
+                {
+                    "date": "20240819",
+                    "totalOffPeak": 8822.317954063416,
+                    "peakUp": 1896.9364919662476,
+                    "total": 47737.28971672058,
+                    "totalUp": 2179.0857677459717,
+                    "peakDown": 37018.03527069092,
+                    "totalDown": 45558.20394897461,
+                    "totalPeak": 38914.971762657166,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 282.1492757797241,
+                    "offPeakDown": 8540.168678283691,
+                    "events": []
+                },
+                {
+                    "date": "20240820",
+                    "totalOffPeak": 9930.326402664185,
+                    "peakUp": 807.1213159561157,
+                    "total": 27227.685465812683,
+                    "totalUp": 1061.0207424163818,
+                    "peakDown": 16490.237747192383,
+                    "totalDown": 26166.6647233963,
+                    "totalPeak": 17297.3590631485,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 253.8994264602661,
+                    "offPeakDown": 9676.426976203918,
+                    "events": []
+                },
+                {
+                    "date": "20240821",
+                    "totalOffPeak": 8171.201392173767,
+                    "peakUp": 977.8929319381714,
+                    "total": 32830.19579029083,
+                    "totalUp": 1324.678526878357,
+                    "peakDown": 23681.101466178894,
+                    "totalDown": 31505.517263412476,
+                    "totalPeak": 24658.994398117065,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 346.78559494018555,
+                    "offPeakDown": 7824.4157972335815,
+                    "events": []
+                },
+                {
+                    "date": "20240822",
+                    "totalOffPeak": 11202.969994544983,
+                    "peakUp": 1997.8072271347046,
+                    "total": 67067.72585105896,
+                    "totalUp": 2327.74298286438,
+                    "peakDown": 53866.94862937927,
+                    "totalDown": 64739.98286819458,
+                    "totalPeak": 55864.75585651398,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 329.9357557296753,
+                    "offPeakDown": 10873.034238815308,
+                    "events": []
+                },
+                {
+                    "date": "20240823",
+                    "totalOffPeak": 13732.202354431152,
+                    "peakUp": 1175.9942979812622,
+                    "total": 33623.49286651611,
+                    "totalUp": 1530.6983737945557,
+                    "peakDown": 18715.2962141037,
+                    "totalDown": 32092.794492721558,
+                    "totalPeak": 19891.29051208496,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 354.70407581329346,
+                    "offPeakDown": 13377.498278617859,
+                    "events": []
+                },
+                {
+                    "date": "20240824",
+                    "totalOffPeak": 14846.552458763123,
+                    "peakUp": 1530.3834285736084,
+                    "total": 66251.71328544617,
+                    "totalUp": 1861.536268234253,
+                    "peakDown": 49874.777398109436,
+                    "totalDown": 64390.177017211914,
+                    "totalPeak": 51405.160826683044,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 331.15283966064453,
+                    "offPeakDown": 14515.399619102478,
+                    "events": []
+                },
+                {
+                    "date": "20240825",
+                    "totalOffPeak": 8058.763865470886,
+                    "peakUp": 1286.3032312393188,
+                    "total": 51195.30551338196,
+                    "totalUp": 1571.941351890564,
+                    "peakDown": 41850.23841667175,
+                    "totalDown": 49623.364161491394,
+                    "totalPeak": 43136.54164791107,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 285.6381206512451,
+                    "offPeakDown": 7773.125744819641,
+                    "events": []
+                },
+                {
+                    "date": "20240826",
+                    "totalOffPeak": 5661.976315498352,
+                    "peakUp": 1420.889229774475,
+                    "total": 34903.95830821991,
+                    "totalUp": 1692.8855752944946,
+                    "peakDown": 27821.092762947083,
+                    "totalDown": 33211.072732925415,
+                    "totalPeak": 29241.981992721558,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 271.99634552001953,
+                    "offPeakDown": 5389.9799699783325,
+                    "events": []
+                },
+                {
+                    "date": "20240827",
+                    "totalOffPeak": 8093.7388162612915,
+                    "peakUp": 1286.1028270721436,
+                    "total": 40882.793825149536,
+                    "totalUp": 1637.64945602417,
+                    "peakDown": 31502.9521818161,
+                    "totalDown": 39245.144369125366,
+                    "totalPeak": 32789.055008888245,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 351.54662895202637,
+                    "offPeakDown": 7742.192187309265,
+                    "events": []
+                },
+                {
+                    "date": "20240828",
+                    "totalOffPeak": 8083.638006210327,
+                    "peakUp": 1108.7718744277954,
+                    "total": 47083.49018287659,
+                    "totalUp": 1866.9572038650513,
+                    "peakDown": 37891.080302238464,
+                    "totalDown": 45216.532979011536,
+                    "totalPeak": 38999.85217666626,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 758.1853294372559,
+                    "offPeakDown": 7325.452676773071,
+                    "events": []
+                },
+                {
+                    "date": "20240829",
+                    "totalOffPeak": 9299.246333122253,
+                    "peakUp": 1882.8500671386719,
+                    "total": 39662.75934123993,
+                    "totalUp": 2386.4102840423584,
+                    "peakDown": 28480.662940979004,
+                    "totalDown": 37276.34905719757,
+                    "totalPeak": 30363.513008117676,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 503.5602169036865,
+                    "offPeakDown": 8795.686116218567,
+                    "events": []
+                },
+                {
+                    "date": "20240830",
+                    "totalOffPeak": 13595.002025604248,
+                    "peakUp": 1105.222635269165,
+                    "total": 46470.518226623535,
+                    "totalUp": 1794.2233238220215,
+                    "peakDown": 31770.293565750122,
+                    "totalDown": 44676.294902801514,
+                    "totalPeak": 32875.51620101929,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 689.0006885528564,
+                    "offPeakDown": 12906.001337051392,
+                    "events": []
+                },
+                {
+                    "date": "20240831",
+                    "totalOffPeak": 8097.302825927734,
+                    "peakUp": 1433.9729843139648,
+                    "total": 53057.66647148132,
+                    "totalUp": 1925.850260734558,
+                    "peakDown": 43526.390661239624,
+                    "totalDown": 51131.816210746765,
+                    "totalPeak": 44960.36364555359,
+                    "ratings": [
+                        {
+                            "ratingThreshold": 0,
+                            "level": "NORMAL",
+                            "ratingUsage": 0,
+                            "ratingPercentUsed": 0
+                        }
+                    ],
+                    "offPeakUp": 491.87727642059326,
+                    "offPeakDown": 7605.425549507141,
+                    "events": []
+                }
+            ],
+            "totalPeakUp": 40743.94582271576,
+            "totalup": 51943.76831531525,
+            "totalDown": 1105411.2913370132,
+            "totalPeak": 849895.5742855072,
+            "totalBooster": 0,
+            "end": "20240901",
+            "totalUsage": 1157355.0596523285,
+            "summaryBy": "day",
+            "isMobileDataService": false,
+            "totalOffPeakDown": 296259.6628742218,
+            "start": "20240801",
+            "totalBoosterDown": 0,
+            "rollingWindow": 0,
+            "rollingMaximumUsage": 0,
+            "serviceIdentifier": "53983050",
+            "totalOffPeak": 307459.4853668213,
+            "totalPeakDown": 809151.6284627914,
+            "usageUnits": "MB",
+            "service": "FIBRE SERVICE",
+            "hasNightTimeCap": true,
+            "totalBoosterUp": 0,
+            "username": "53983050"
+        }
+    },
+    "httpStatusCode": 200,
+    "httpStatusText": "OK"
+}

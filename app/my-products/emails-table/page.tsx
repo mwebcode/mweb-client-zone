@@ -47,5 +47,4 @@ const EmailsPagePage: React.FC = () => {
     </div>
   );
 };
-
 export default EmailsPagePage;

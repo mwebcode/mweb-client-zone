@@ -1,0 +1,214 @@
+[
+    {
+        "productCode": "FTTH-VUM-200MB-UNC-PRM",
+        "productName": "Uncapped 500/200Mbps Fibre - Vumatel",
+        "category": "0 FTTH",
+        "subcategory": "Vumatel Uncapped",
+        "consumerCategory": "",
+        "productDescription": "Uncapped 500/200Mbps Fibre - Vumatel",
+        "productRate": 1285,
+        "productDiscountType": "%",
+        "productDiscountAmount": 0,
+        "productDiscountPeriod": 0,
+        "productDiscountSequence": 1,
+        "onceOffCharge": false,
+        "summary": "Never run out of data with Uncapped Fibre. Enjoy fast and reliable access, connect all devices and save on monthly data bills. Sign up now and pay no upfront costs AND get a FREE Fibre router.",
+        "isHero": false,
+        "heroOption": "na",
+        "heroTagLine": "",
+        "heroImage": "",
+        "sellOnline": true,
+        "accessLimit": -1,
+        "accessLimitUnits": "Not applicable",
+        "highlight1": "Stream with no limits",
+        "highlight2": "Entertain, work & study",
+        "highlight3": "No contract",
+        "highlight1Icon": "sun",
+        "highlight2Icon": "sun",
+        "highlight3Icon": "sun",
+        "seoTitle": "500Mbps UncappedVumatel Fibre | Mweb",
+        "seoDescription": "Mweb's 500Mbps download 200Mbps upload uncapped fibre from Vumatel offers you a high speed internet connection at an affordable cost. Check your coverage.",
+        "seoKeywords": [
+            "Fibre",
+            " Uncapped",
+            " Data"
+        ],
+        "includes": [],
+        "highlights": [
+            "Stream with no limits",
+            "Entertain, work & study",
+            "No contract"
+        ],
+        "technicalTerms": "",
+        "lineSpeed": 512000,
+        "parameters": [
+            {
+                "name": "turnAroundTime",
+                "value": "720"
+            },
+            {
+                "name": "technology",
+                "value": "FTTH UNCAPPED - VUMATEL"
+            },
+            {
+                "name": "concurrency",
+                "value": "1"
+            },
+            {
+                "name": "isCapped",
+                "value": "Uncapped"
+            },
+            {
+                "name": "isThrottled",
+                "value": "Unthrottled"
+            },
+            {
+                "name": "isShaped",
+                "value": "Shaped"
+            },
+            {
+                "name": "downloadSpeed",
+                "value": "512000.0 KBPS"
+            },
+            {
+                "name": "uploadSpeed",
+                "value": "204800.0 KBPS"
+            },
+            {
+                "name": "nightTimeCap",
+                "value": "-1 GB"
+            }
+        ],
+        "hasPreProduct": false,
+        "preProduct": null,
+        "genericWorkflowImplementation": null,
+        "productDescriptionAlternative": "",
+        "friendlyName": "500Mbps Uncapped Fibre",
+        "invoiceRollupDescription": "Uncapped 500/200Mbps Fibre",
+        "minimumContractMonths": 0,
+        "chargePeriod": "Monthly",
+        "highlight4": "",
+        "highlight5": "",
+        "highlight6": "",
+        "highlight4Icon": "no-icon",
+        "highlight5Icon": "no-icon",
+        "highlight6Icon": "no-icon",
+        "displayPrice": -1,
+        "tagLine": "",
+        "promoCode": "VUMA-PORTAL",
+        "promoCodeTagLine": "",
+        "productCap": 99999,
+        "productCapNightTime": -1,
+        "productCapType": "Uncapped",
+        "lineSpeedUpload": 204800,
+        "infrastructureProvider": "Vumatel",
+        "productThrottlingType": "Unthrottled",
+        "recommendedProducts": []
+    },
+    {
+        "productCode": "FTTH-VUMA-UNCAPPED-1GBPS",
+        "productName": "Uncapped 1Gbps Fibre - Vumatel",
+        "category": "0 FTTH",
+        "subcategory": "Vumatel Uncapped",
+        "consumerCategory": "",
+        "productDescription": "Uncapped 1Gbps Fibre - Vumatel",
+        "productRate": 1585,
+        "productDiscountType": "%",
+        "productDiscountAmount": 0,
+        "productDiscountPeriod": 0,
+        "productDiscountSequence": 1,
+        "onceOffCharge": false,
+        "summary": "Never run out of data with Uncapped Fibre. Enjoy fast and reliable access, connect all devices and save on monthly data bills. Sign up now and pay no upfront costs AND get a FREE Fibre router.",
+        "isHero": false,
+        "heroOption": "na",
+        "heroTagLine": "",
+        "heroImage": "",
+        "sellOnline": true,
+        "accessLimit": -1,
+        "accessLimitUnits": "Not applicable",
+        "highlight1": "Stream with no limits",
+        "highlight2": "Entertain, work & study",
+        "highlight3": "No contract",
+        "highlight1Icon": "sun",
+        "highlight2Icon": "sun",
+        "highlight3Icon": "sun",
+        "seoTitle": "1Gbps Uncapped Vumatel Fibre | Mweb",
+        "seoDescription": "Mweb's 1Gbps download 250Mbps upload uncapped fibre from Vumatel offers you a high speed internet connection at an affordable cost. Check your coverage.",
+        "seoKeywords": [
+            "Fibre",
+            "Uncapped",
+            " Unlimited Data"
+        ],
+        "includes": [],
+        "highlights": [
+            "Stream with no limits",
+            "Entertain, work & study",
+            "No contract"
+        ],
+        "technicalTerms": "",
+        "lineSpeed": 1048576,
+        "parameters": [
+            {
+                "name": "turnAroundTime",
+                "value": "72"
+            },
+            {
+                "name": "technology",
+                "value": "FTTH UNCAPPED - VUMATEL"
+            },
+            {
+                "name": "concurrency",
+                "value": "1"
+            },
+            {
+                "name": "isCapped",
+                "value": "Uncapped"
+            },
+            {
+                "name": "isThrottled",
+                "value": "Unthrottled"
+            },
+            {
+                "name": "isShaped",
+                "value": "Shaped"
+            },
+            {
+                "name": "downloadSpeed",
+                "value": "1048576.0 KBPS"
+            },
+            {
+                "name": "uploadSpeed",
+                "value": "256000.0 KBPS"
+            },
+            {
+                "name": "nightTimeCap",
+                "value": "-1 GB"
+            }
+        ],
+        "hasPreProduct": false,
+        "preProduct": null,
+        "genericWorkflowImplementation": null,
+        "productDescriptionAlternative": null,
+        "friendlyName": "1Gbps Uncapped Fibre",
+        "invoiceRollupDescription": "Uncapped 1Gbps Fibre",
+        "minimumContractMonths": 0,
+        "chargePeriod": "Monthly",
+        "highlight4": "",
+        "highlight5": "",
+        "highlight6": "",
+        "highlight4Icon": "no-icon",
+        "highlight5Icon": "no-icon",
+        "highlight6Icon": "no-icon",
+        "displayPrice": -1,
+        "tagLine": "",
+        "promoCode": "VUMA-PORTAL",
+        "promoCodeTagLine": "",
+        "productCap": 99999,
+        "productCapNightTime": -1,
+        "productCapType": "Uncapped",
+        "lineSpeedUpload": 256000,
+        "infrastructureProvider": "Vumatel",
+        "productThrottlingType": "Unthrottled",
+        "recommendedProducts": []
+    }
+]

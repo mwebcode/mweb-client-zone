@@ -23,14 +23,12 @@ const ServiceAccountPage: React.FC = () => {
       console.log('data :', result)
       setLoading(false);
     };
-
     fetchData();
   }, []);
-
+  
   if (loading) {
     return <div>Loading...</div>;
   }
-
   const handleRowSelect = (row: ServiceAccount) => {
     setSelectedAccount(row); 
     console.log(row);
@@ -39,17 +37,14 @@ const ServiceAccountPage: React.FC = () => {
   const handleBack = () => {
     setSelectedAccount(null); 
   };
-
   return (
-    <div className="container mx-auto py-10">
+    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-100 to-white">
       {selectedAccount ? (
         <ServiceAccountDetails account={selectedAccount} onBack={handleBack} />
       ) : (
         <DataTable columns={columns} data={data} onRowSelect={handleRowSelect} />
-       
       )}
     </div>
   );
 };
-
 export default ServiceAccountPage;

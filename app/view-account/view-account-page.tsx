@@ -2,12 +2,21 @@
 
 import React, { useEffect, useState } from 'react';
 import './view-account.css';
+import { useRouter } from 'next/navigation';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { InfoIcon } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faScrewdriverWrench,faChartColumn,faCog  } from '@fortawesome/free-solid-svg-icons';
@@ -41,6 +50,7 @@ import {
   CategoryScale,
   LinearScale,
   Legend,
+  ChartData,
 } from "chart.js";
 import { Badge } from '@/components/ui/badge';
 
@@ -244,6 +254,33 @@ interface MailboxData {
   links: any[]; 
   status: any[];
 }
+interface Month {
+  title: string;
+  month: string;
+}
+
+interface Rating {
+  ratingThreshold: number;
+  level: string;
+  ratingUsage: number;
+  ratingPercentUsed: number;
+}
+
+interface Usage {
+  date: string;
+  totalUp: number;
+  totalDown: number;
+  total: number;
+  totalOffPeak: number;
+  peakUp: number;
+  peakDown: number;
+  totalPeak: number;
+  offPeakUp: number;
+  offPeakDown: number;
+  ratings: Rating[]; 
+  events: any[];
+}
+
 
 
 const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, onBack }) => {
@@ -258,38 +295,112 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
   const [groups, setGroups] = useState<Group[] | null>(null);
   const [data, setData] = useState<MailboxData | null>(null); 
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [usageData, setUsageData] = useState<Usage[]>([]);
+  const [months, setMonths] = useState<Month[]>([]);
+  const [selectedMonth, setSelectedMonth] = useState<string>('202410');
+  const [chartData, setChartData] = useState<ChartData<'bar', number[], unknown>>({
+    labels: [],
+    datasets: [],
+  });
+  const router = useRouter();
+  const [isDialogOpenChangeProduct, setIsDialogOpenForChangeProduct] = useState(false);
+  
 
-  const [selectedOption, setSelectedOption] = useState("30 Days");
-  const data1 = {
-    labels: Array.from({ length: 31 }, (_, i) => i + 1),
-    datasets: [
-      {
-        label: "Download",
-        data: [50, 60, 80, 70, 90, 40, 60, 85, 65, 30, 50, 60, 70, 65, 55, 60, 55, 45, 40, 50, 60, 40, 55, 45, 50, 55, 75, 65, 40, 50, 65],
-        backgroundColor: "#4dc9f6",
-      },
-      {
-        label: "Upload",
-        data: [10, 20, 25, 15, 30, 10, 20, 40, 30, 20, 15, 30, 20, 25, 20, 10, 15, 20, 15, 25, 20, 10, 20, 15, 25, 15, 30, 25, 20, 15, 10],
-        backgroundColor: "#36a2eb",
-      },
-      {
-        label: "Night time data",
-        data: [5, 10, 15, 10, 20, 5, 10, 25, 20, 10, 10, 15, 10, 15, 10, 5, 10, 15, 10, 15, 10, 5, 15, 10, 15, 10, 20, 15, 10, 5, 10],
-        backgroundColor: "#ffcd56",
-      },
-    ],
+  const fetchLastTwelveMonthsData = async () => {
+    const monthsToFetch = months.slice(0, 13);
+    const promises = monthsToFetch.map(async (month) => {
+      try {
+        const response = await fetch(`/${month.month}SessionSummary.json`);
+        const data = await response.json();
+        console.log(month.month); 
+        console.log(data); 
+        return data.responseBody.usage; 
+      } catch (error) {
+        console.error(`Error fetching data for ${month.month}:`, error);
+        return null;
+      }
+    });
+  
+    const results = await Promise.all(promises);
+    const validResults = results.filter(data => data !== null && Array.isArray(data));
+    const downloadData = usageData.map(item => item.totalDown);
+      const uploadData = usageData.map(item => item.peakDown);
+      const nightData = usageData.map(item => item.totalOffPeak);
+
+  
+    setChartData({
+      labels: monthsToFetch.map(month => month.title),
+      datasets: [
+        {
+          label: "Download",
+          data: downloadData,
+          backgroundColor: "#4dc9f6",
+        },
+        {
+          label: "Upload",
+          data: uploadData,
+          backgroundColor: "#36a2eb",
+        },
+        {
+          label: "Night time data",
+          data: nightData,
+          backgroundColor: "#ffcd56",
+        },
+      ],
+    });
   };
+  
+  const handleFetchTwelveMonthsData = () => {
+    fetchLastTwelveMonthsData();
+  };
+
+  useEffect(() => {
+    if (usageData.length > 0) {
+      const downloadData = usageData.map(item => item.totalDown);
+      const uploadData = usageData.map(item => item.peakDown);
+      const nightData = usageData.map(item => item.totalOffPeak);
+
+      setChartData({
+        labels: Array.from({ length: usageData.length }, (_, i) => i + 1),
+        datasets: [
+          {
+            label: "Download",
+            data: downloadData,
+            backgroundColor: "#4dc9f6",
+          },
+          {
+            label: "Upload",
+            data: uploadData,
+            backgroundColor: "#36a2eb",
+          },
+          {
+            label: "Night time data",
+            data: nightData,
+            backgroundColor: "#ffcd56",
+          },
+        ],
+      });
+    }
+    
+  }, [usageData]);
 
   const options = {
     responsive: true,
     scales: {
       x: {
         stacked: true,
+        title: {
+          display: true,
+          text: '',
+        },
       },
       y: {
         stacked: true,
         beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Usage in GB', 
+        },
       },
     },
     plugins: {
@@ -298,6 +409,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
       },
     },
   };
+  
   
   
   
@@ -314,6 +426,41 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchMonths = async () => {
+      try {
+        const response = await fetch('/Months.json');
+        const data: Month[] = await response.json();
+        setMonths(data);
+      } catch (error) {
+        console.error('Error fetching the months:', error);
+      }
+    };
+
+    fetchMonths();
+  }, []);
+
+  const handleMonthChange = (value: string) => {
+    setSelectedMonth(value); 
+  };
+
+  useEffect(() => {
+    const fetchUsageData = async () => {
+      if (selectedMonth) {
+        try {
+          const response = await fetch(`/${selectedMonth}SessionSummary.json`);
+          const data = await response.json();
+          setUsageData(data.responseBody.usage);
+        } catch (error) {
+          console.error('Error fetching usage data:', error);
+        }
+      }
+    };
+
+    fetchUsageData();
+  }, [selectedMonth]);
+
 
   // Fetch service settings data, groups and settings
   useEffect(() => {
@@ -341,16 +488,11 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
 
     fetchData();
   }, []);
-
-  const handleClick = (option: React.SetStateAction<string>) => {
-    setSelectedOption(option);
-  };
  
   
 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, name: string) => {
-    // Handle input changes here
     console.log(name, e.target.value);
   };
 
@@ -373,14 +515,11 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
 
   const password = getPassword();
 
-  // password toggler 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
   
 
-
-  // Fetch the JSON data from the public folder
     useEffect(() => {
         fetch('/settings.json')
             .then((response) => response.json())
@@ -428,6 +567,11 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
     setIsDialogOpen(false); 
   };
 
+  const openChangeProductDialog = () => {
+    setIsDialogOpenForChangeProduct(true);
+  };
+
+
 
   const servicesTobeDisplayed = account.services.filter(service =>
     ![566, 4, 138, 50].includes(service.serviceTypeId)
@@ -448,7 +592,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                   type="text"
                   value={friendlyName}
                   onChange={(e) => setFriendlyName(e.target.value)}
-                  onBlur={handleSave} // Save on blur
+                  onBlur={handleSave} 
                   onKeyDown={(e) => e.key === 'Enter' && handleSave()}
                   style={{
                     width: '200px',
@@ -518,17 +662,30 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
         <div className="account-address">
           {account.serviceAccountPrimaryContactDisplayName}
         </div>
+
+        <Button className='mr-4 bg-[#255d7e] text-white' variant="outline" onClick={() => router.push('/my-service-accounts')} >
+         Get Faster Fibre
+        </Button>
+        <Button className='mr-4 bg-[#255d7e] text-white' variant="outline" onClick={() => router.push('/my-service-accounts')}>
+         Add New Product
+        </Button>
+        {account.contracts[0]?.canChangeProduct &&(
+        <Button className='mb-4 bg-[#255d7e] text-white' variant="outline" onClick={() => openChangeProductDialog()}>
+         Change product
+        </Button>
+        )}
   
         <div className="contracts-section">
           <h3>Contracts</h3>
           {account.contracts.map((contract) => (
             <div key={contract.id} className="contract-row">
-              <Badge variant="outline">{contract.status}</Badge>
+              <Badge variant="outline" style={{ backgroundColor: 'green', color: 'white' }}>{contract.status}</Badge>
               <span className="contract-description">{contract.displayName}</span>
               <span className="contract-price">R{contract.activeRate} PM</span>
             </div>
           ))}
         </div>
+
   
         <div className="included-services-section">
           <h3>Included Services</h3>
@@ -541,13 +698,13 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                   <React.Fragment key={service.id}>
                     <tr>
                       <td>
-                      <Badge variant="outline">{service.status}</Badge>
-                        {/* <span className="status-label">{service.status}</span> */}
+                      <Badge variant="outline" style={{ backgroundColor: 'green', color: 'white' }}>{service.status}</Badge>
+                       
                       </td>
                       <td>{service.name}</td>
                       <td>{service.crm1 || 'N/A'}</td>
                       <td>
-                        {/* Service Settings Icon - Remove this entirely if hasServiceActions is true */}
+                        {/* Service Settings Icon */}
                         {service.hasServiceSettings &&
                           !service.hasServiceActions && (
                             <FontAwesomeIcon
@@ -633,34 +790,40 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
                     {expandedServiceId === service.id && (
                       <tr>
                         <td colSpan={4}>
-                          <div className="button-container">
-                            <button
-                              className={`option-button ${
-                                selectedOption === '30 Days' ? 'active' : ''
-                              }`}
-                              onClick={() => handleClick('30 Days')}
-                            >
-                              30 Days
-                            </button>
-                            <button
-                              className={`option-button ${
-                                selectedOption === '12 Months' ? 'active' : ''
-                              }`}
-                              onClick={() => handleClick('12 Months')}
-                            >
-                              12 Months
-                            </button>
-                            <div className="dropdown">
-                              <span>View by month</span>
-                              <select>
-                                <option value="July 2024">July 2024</option>
-                                {/* Add other month options as needed */}
-                              </select>
-                            </div>
+                          
+                          <div className="flex items-center space-x-4">
+                             <span className="font-semibold text-gray-600">Usage</span>
+
+                              {/* Time Range Buttons */}
+                          <div className="flex space-x-2">
+                               <Button className='bg-[#255d7e] text-white' variant="outline">30 DAYS</Button>
+                               <Button className='mr-4 bg-[#255d7e] text-white' variant="outline" onClick={handleFetchTwelveMonthsData} >
+                                  12 MONTHS
+                               </Button>
                           </div>
+
+                              {/* Dropdown */}
+                              <Select onValueChange={handleMonthChange} defaultValue={selectedMonth}>
+                                   <SelectTrigger className="bg-[#255d7e] text-white w-[180px]">
+                                          <SelectValue placeholder="Select Month" />
+                                   </SelectTrigger>
+                                   <SelectContent>
+                                         {months.map((month, index) => (
+                                         <SelectItem key={index} value={month.month}>
+                                            {month.title}
+                                 </SelectItem>
+                                 ))}
+                                  </SelectContent>
+                              </Select>
+                          </div>
+                            
+                          
                           <div className="chart-container">
-                            <Bar data={data1} options={options} />
+                            <Bar data={chartData} options={options} />
                           </div>
+                          <Button className='mb-4 bg-[#255d7e] text-white' variant="outline" onClick={() => router.push('/my-usage')}>
+                            View Session
+                          </Button>
                         </td>
                       </tr>
                     )}
@@ -866,10 +1029,10 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
             </Accordion>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={closeDialog}>
+            <Button className='bg-[#255d7e] text-white' variant="outline" onClick={closeDialog}>
               Close
             </Button>
-            <Button variant="outline">Save</Button>
+            <Button className='bg-[#255d7e] text-white' variant="outline">Save</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -888,11 +1051,11 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
               Activate your free mailbox as it has not been created or was
               removed due to non-use
             </DialogDescription>
-            <Button variant="outline">Activate Mailbox</Button>
+            <Button className='bg-[#255d7e] text-white' variant="outline">Activate Mailbox</Button>
           </DialogHeader>
           <DialogFooter>
             <Button
-              variant="outline"
+             className='bg-[#255d7e] text-white' variant="outline"
               onClick={() => setIsDialogOpen1(false)}
             >
               Close
@@ -951,12 +1114,38 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
           </DialogHeader>
           <DialogFooter>
             <Button
-              variant="outline"
+              className='bg-[#255d7e] text-white' variant="outline"
               onClick={() => setIsDialogOpenAction(false)}
             >
               Close
             </Button>
-            <Button variant="outline">Save</Button>
+            <Button className='bg-[#255d7e] text-white' variant="outline">Save</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+
+
+      <Dialog open={isDialogOpenChangeProduct} onOpenChange={setIsDialogOpenForChangeProduct}>
+        <DialogTrigger asChild>
+          <button style={{ display: 'none' }}>Open</button>
+        </DialogTrigger>
+        <DialogContent style={{ backgroundColor: 'white' }}>
+          <DialogHeader>
+            <DialogTitle>
+              I want to :
+            </DialogTitle>
+            <Button  className='bg-[#255d7e] text-white' variant="outline" onClick={() => router.push('/change-product')}>Upgrade Products</Button>
+            <Button  className='bg-[#255d7e] text-white' variant="outline">Downgrage product</Button>
+            <Button  className='bg-[#255d7e] text-white' variant="outline">Apply Promotion Voucher</Button>
+          </DialogHeader>
+          <DialogFooter>
+            <Button
+              className='bg-[#255d7e] text-white' variant="outline"
+              onClick={() => setIsDialogOpen1(false)}
+            >
+              Close
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
