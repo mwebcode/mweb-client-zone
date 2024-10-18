@@ -174,6 +174,7 @@ interface Product {
 
   // Function to render filter buttons
   const renderFilterButtons = () => {
+
     return (
         <Card className=" bg-gradient-to-b from-blue-100 to-white bg-white max-w-[1024px] container mx-auto p-4 mb-9">
         <div className="flex space-x-4">
