@@ -302,8 +302,75 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
     labels: [],
     datasets: [],
   });
+
   const router = useRouter();
   const [isDialogOpenChangeProduct, setIsDialogOpenForChangeProduct] = useState(false);
+
+
+  const fetchDailyDataForMonth = async () => {
+    try {
+      const allUsageData = [];
+      let currentMonthIndex = months.findIndex(month => month.month === selectedMonth);
+      
+      //current month and the following months
+      for (let i = currentMonthIndex; i < months.length; i++) {
+        const month = months[i];
+        const response = await fetch(`/${month.month}SessionSummary.json`);
+        const data = await response.json();
+        const usageData = data.responseBody.usage;
+  
+        // Filter out days with zero totalDown
+        const validDays = usageData.filter((item: { totalDown: number; }) => item.totalDown > 0);
+        allUsageData.push(...validDays);
+  
+        // 30 valid days
+        if (allUsageData.length >= 30) break;
+      }
+      //  valid days
+      const validDaysToUse = allUsageData.slice(0, 30);
+  
+      const dayLabels: number[] = [];
+      const downloadData: number[] = [];
+      const uploadData: number[] = [];
+      const nightData: number[] = [];
+  
+      validDaysToUse.forEach(item => {
+        const day = parseInt(item.date.slice(-2), 10);
+        dayLabels.push(day);
+        downloadData.push(item.totalDown);
+        uploadData.push(item.peakDown);
+        nightData.push(item.totalOffPeak);
+      });
+  
+      setChartData({
+        labels: dayLabels,
+        datasets: [
+          {
+            label: "Download",
+            data: downloadData,
+            backgroundColor: "#4dc9f6",
+          },
+          {
+            label: "Upload",
+            data: uploadData,
+            backgroundColor: "#36a2eb",
+          },
+          {
+            label: "Night time data",
+            data: nightData,
+            backgroundColor: "#ffcd56",
+          },
+        ]
+    });
+    } catch (error) {
+      console.error(`Error fetching daily data for ${selectedMonth}:`, error);
+    }
+  };
+  
+  const handleFetchDailyData = () => {
+    fetchDailyDataForMonth();
+  };
+  
   
 
   const fetchLastTwelveMonthsData = async () => {
@@ -349,9 +416,17 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
       ],
     });
   };
-  
+
+
   const handleFetchTwelveMonthsData = () => {
     fetchLastTwelveMonthsData();
+  };
+
+  const formatSelectedMonth = (month: string): string => {
+    const year = month.substring(0, 4);
+    const monthIndex = month.substring(4, 6);
+    const date = new Date(Number(year), Number(monthIndex) - 1);
+    return new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(date);
   };
 
   useEffect(() => {
@@ -392,7 +467,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
         stacked: true,
         title: {
           display: true,
-          text: '',
+          text: `${formatSelectedMonth(selectedMonth)}`,
         },
       },
       y: {
@@ -489,6 +564,10 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
 
     fetchData();
   }, []);
+
+  
+  
+  
  
   
 
@@ -797,7 +876,7 @@ const ServiceAccountDetails: React.FC<ServiceAccountDetailsProps> = ({ account, 
 
                               {/* Time Range Buttons */}
                           <div className="flex space-x-2">
-                               <Button className='bg-[#255d7e] text-white' variant="outline">30 DAYS</Button>
+                               <Button className='bg-[#255d7e] text-white' variant="outline" onClick={handleFetchDailyData}>30 DAYS</Button>
                                <Button className='mr-4 bg-[#255d7e] text-white' variant="outline" onClick={handleFetchTwelveMonthsData} >
                                   12 MONTHS
                                </Button>
