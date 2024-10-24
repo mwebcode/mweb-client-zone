@@ -23,10 +23,18 @@ interface Usage {
   total: number;
 }
 
+interface ServiceSettings {
+  dialogTitle: string;
+  username: string;
+  serviceTypeId: number;
+  settings: any; 
+}
+
 const UsageTable = () => {
   const [months, setMonths] = useState<Month[]>([]);
   const [usageData, setUsageData] = useState<Usage[]>([]);
-  const [selectedMonth, setSelectedMonth] = useState<string>('202410'); // Set October as the default
+  const [selectedMonth, setSelectedMonth] = useState<string>('202410'); 
+  const [serviceData, setServiceData] = useState<ServiceSettings | null>(null);
 
   // Fetch months from Months.json file
   useEffect(() => {
@@ -59,10 +67,30 @@ const UsageTable = () => {
     };
 
     fetchUsageData();
-  }, [selectedMonth]); // Trigger fetching when selectedMonth changes
+  }, [selectedMonth]); 
+
+  useEffect(() => {
+    const fetchServiceData = async () => {
+      try {
+        const response = await fetch('/fibre-service.json');
+        const data = await response.json();
+        setServiceData(data);
+        // setGroups(data.groups);
+      } catch (error) {
+        console.error('Error fetching service data:', error);
+      }
+    };
+
+    fetchServiceData();
+  }, []);
+
+  const handlePrint = () => {
+    window.print();
+  };
+
 
   const handleMonthChange = (value: string) => {
-    setSelectedMonth(value); // Update selected month when user selects an option
+    setSelectedMonth(value);
   };
 
    // Function to format date
@@ -80,13 +108,25 @@ const UsageTable = () => {
         month: 'short',
         year: 'numeric'
     }).format(date);
+
+    
+
+    
 };
 
   return (
-    <Card>
+    <Card className="flex flex-col items-center justify-center bg-gradient-to-b from-blue-100 to-white">
+      <div className="">
+      <button className="back-button">
+        Back to My Service Accounts
+      </button>
+      <h3>
+         Fibre - View Sessions Usage - {serviceData?.username}
+      </h3>
+      </div>
     <div className="max-w-[1024px] container mx-auto p-4 mb-9">
       <Select onValueChange={handleMonthChange} defaultValue={selectedMonth}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="bg-[#255d7e] text-white w-[180px]">
           <SelectValue placeholder="Select Month" />
         </SelectTrigger>
         <SelectContent>
@@ -105,9 +145,9 @@ const UsageTable = () => {
           <thead className="bg-gray-100">
             <tr>
               <th className="w-[100px] p-2 border-b text-left">Date</th>
-              <th className="p-2 border-b text-right">Data Sent (GB)</th>
-              <th className="p-2 border-b text-right">Data Received (GB)</th>
-              <th className="p-2 border-b text-right">Total (GB)</th>
+              <th className="p-2 border-b text-right">Data Sent</th>
+              <th className="p-2 border-b text-right">Data Received</th>
+              <th className="p-2 border-b text-right">Total</th>
             </tr>
           </thead>
           <tbody>
@@ -123,8 +163,8 @@ const UsageTable = () => {
         </table>
       )
       }
-       <Button variant="outline" className="mb-4">
-         Print
+       <Button  variant="outline" className="mb-10 mt-4 bg-[#255d7e] text-white w-[180px]" onClick={handlePrint}>
+              Print
         </Button>
     </div>
     </Card>
