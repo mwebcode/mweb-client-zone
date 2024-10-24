@@ -38,7 +38,7 @@ const ServiceAccountPage: React.FC = () => {
     setSelectedAccount(null); 
   };
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-100 to-white">
+    <div className="flex flex-col items-center justify-center h-screen to-white">
       {selectedAccount ? (
         <ServiceAccountDetails account={selectedAccount} onBack={handleBack} />
       ) : (

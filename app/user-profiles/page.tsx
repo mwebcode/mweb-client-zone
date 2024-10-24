@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
+import {Checkbox} from "@/components/ui/checkbox";
 
 const formSchema = z.object({
     username: z.string().min(2, {
@@ -34,18 +35,18 @@ const formSchema = z.object({
 });
 
 const UserProfiles: React.FC = () => {
-    const Checkbox = ({ label, name, checked, onChange }: any) => (
-        <label className="custom-checkbox flex">
-            <input
-                type="checkbox"
-                name={name}
-                checked={checked}
-                onChange={onChange}
-            />
-            <span className="checkmark"></span>
-            {label}
-        </label>
-    );
+    // const Checkbox = ({ label, name, checked, onChange }: any) => (
+    //     <label className="custom-checkbox flex">
+    //         <input
+    //             type="checkbox"
+    //             name={name}
+    //             checked={checked}
+    //             onChange={onChange}
+    //         />
+    //         <span className="checkmark bg-accent"></span>
+    //         {label}
+    //     </label>
+    // );
     const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
     const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState<boolean>(false);
     const [isChangeOtpDialogOpen, setIsChangeOtpDialogOpen] = useState<boolean>(false);
@@ -147,22 +148,22 @@ const UserProfiles: React.FC = () => {
         <>
             <MwebSliceContainer
                 sectionId='corporate-user-management'
-                bgColor='bg-mwBlueGrey-25 '
+                bgColor=''
                 padding='px-4 py-14 md:px-20 md:py-18 desktop:px-[182px] desktop:py-24'
 
             >
                 <div className="w-full max-w-[1024px] mx-auto items-center">
-                    <button className="back-button mb-8 text-[#255D7E]" onClick={() => {}}>Back to My Service Accounts</button>
+                    <button className="back-button mb-8 text-primary" onClick={() => {}}>Back to My Service Accounts</button>
                     <div className='mb-6'>
                         <h2 className='font-bold mb-4'>Managing User Profiles</h2>
                         <p>Add additional users and assign different access to help manage your Mweb accounts and products. Users can interact with your account both online and via our contact centre and will be considered to be acting on your behalf with the role that you have assigned to them.
                             Read more about user profiles and roles in this easy guide.</p>
                     </div>
-                    <Button className='mb-4 bg-[#255d7e] text-white' variant="outline" onClick={() => {handleAdderUserProfile()}}>Add User Profile</Button>
+                    <Button className='mb-4 bg-primary text-primary-foreground' variant="outline" onClick={() => {handleAdderUserProfile()}}>Add User Profile</Button>
                     {contractsMockedData.flatMap((contract:any,i) => {
                         return (
                             <>
-                                <Accordion type="single" collapsible className='bg-[#FFFFFF] '>
+                                <Accordion type="single" collapsible className=''>
                                     <AccordionItem value="item-1" className='px-4 mb-2'>
                                         <AccordionTrigger className='hover:no-underline'>{contract.contactDisplayName} ({contract.contactType !== 'None'? contract.contactType: contract.accessLevel}) ({contract.contactUsername})</AccordionTrigger>
                                         <AccordionContent>
@@ -170,54 +171,79 @@ const UserProfiles: React.FC = () => {
                                                 <h3 className='font-bold pb-2'>Personal Details</h3>
                                                 <hr/>
                                                 <div key={i} className="grid grid-cols-2 gap-4 py-2">
-                                                    <span className="font-light">Name: {contract.contactDisplayName}</span>
-                                                    <span className='font-light'>ID Number: {contract.contactIdNumber}</span>
+                                                    <span className="">Name: {contract.contactDisplayName}</span>
+                                                    <span className=''>ID Number: {contract.contactIdNumber}</span>
                                                 </div>
                                                 <div key={i} className="grid grid-cols-2 gap-4 py-2 mb-5">
-                                                    <span className="font-light">Date Of Birth: {contract.contactBirthDate}</span>
-                                                    <span className='font-light'>Username: {contract.contactUsername}</span>
+                                                    <span className="">Date Of Birth: {contract.contactBirthDate}</span>
+                                                    <span className=''>Username: {contract.contactUsername}</span>
                                                 </div>
                                                 <div className="">
                                                     <h3 className='font-bold pb-2'>Contact Details</h3>
                                                     <hr/>
-                                                    <div key={i} className="grid grid-cols-2 gap-4 py-2">
-                                                        <span className="font-light">Home Tel: {contract.contactHomeNumber}</span>
-                                                        <span className='font-light'>Mobile Number: {contract.contactCellNumber}</span>
+                                                    <div key={i} className="grid grid-cols-2 gap-4 py-2 ">
+                                                        <span className="">Home Tel: {contract.contactHomeNumber}</span>
+                                                        <span className=''>Mobile Number: {contract.contactCellNumber}</span>
                                                     </div>
-                                                    <div key={i} className="grid grid-cols-2 gap-4 py-2">
-                                                        <span className="font-light">OTP Number: {contract.contactOtpNumber}</span>
-                                                        <span className='font-light'>Work Tel: {contract.contactWorkNumber}</span>
+                                                    <div key={i} className="grid grid-cols-2 gap-4 py-2 ">
+                                                        <span className="">OTP Number: {contract.contactOtpNumber}</span>
+                                                        <span className=''>Work Tel: {contract.contactWorkNumber}</span>
                                                     </div>
-                                                    <div key={i} className="grid grid-cols-2 gap-4 py-2 mb-5">
-                                                        <span className="font-light">Email: {contract.contactEmailAddress}</span>
-                                                        <span className='font-light'></span>
+                                                    <div key={i} className="grid grid-cols-2 gap-4 py-2 mb-5 ">
+                                                        <span className="">Email: {contract.contactEmailAddress}</span>
+                                                        <span className='f'></span>
                                                     </div>
                                                     <div className="">
                                                         <h3 className='font-bold pb-2'>Notifications</h3>
                                                         <hr/>
                                                         <div key={i} className="grid grid-cols-2 gap-4 py-2">
-                                                            <Checkbox
-                                                                label="Email"
-                                                                name="Email"
-                                                                checked={contract.optInEmails}
-                                                            />
-                                                            <Checkbox
-                                                                label="SMS"
-                                                                name="SMS"
-                                                                checked={contract.optInSms}
-                                                            />
+                                                            <div className="flex gap-2 items-center">
+                                                                <Checkbox
+                                                                    id="email"
+                                                                    name="email"
+                                                                    checked={contract.optInEmails}
+                                                                    // onCheckedChange={(checked) => console.log(checked)}
+                                                                />
+                                                                <label htmlFor="email">
+                                                                    Email
+                                                                </label>
+                                                            </div>
+                                                            <div className="flex gap-2 items-center">
+                                                                <Checkbox
+                                                                    id="sms"
+                                                                    name="sms"
+                                                                    checked={contract.optInSms}
+                                                                    // onCheckedChange={(checked) => console.log(checked)}
+                                                                />
+                                                                <label htmlFor="sms">
+                                                                    SMS
+                                                                </label>
+                                                            </div>
                                                         </div>
                                                         <div key={i} className="grid grid-cols-2 gap-4 py-2 mb-5">
-                                                            <Checkbox
-                                                                label="Call"
-                                                                name="Call"
-                                                                checked={contract.optInCalls}
-                                                            />
-                                                            <Checkbox
-                                                                label="WhatsApp"
-                                                                name="WhatsApp"
-                                                                checked={contract.optInWhatsApp}
-                                                            />
+                                                            <div className="flex gap-2 items-center">
+                                                                <Checkbox
+                                                                    id="call"
+                                                                    name="call"
+                                                                    checked={contract.optInCalls}
+                                                                    // onCheckedChange={(checked) => console.log(checked)}
+                                                                />
+                                                                <label htmlFor="call">
+                                                                    Call
+                                                                </label>
+                                                            </div>
+                                                            <div className="flex gap-2 items-center">
+                                                                <Checkbox
+                                                                    id="whatsApp"
+                                                                    name="whatsApp"
+                                                                    checked={contract.optInWhatsApp}
+                                                                    // onCheckedChange={(checked) => console.log(checked)}
+                                                                />
+                                                                <label htmlFor="whatsApp">
+                                                                    Whatsapp
+                                                                </label>
+                                                            </div>
+
                                                         </div>
                                                         <div>
                                                             <p className='text-[11px]'>Allow SMS Outage Notifications</p>
@@ -243,11 +269,11 @@ const UserProfiles: React.FC = () => {
                                                             </div>
 
                                                             <div key={i} className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 py-2">
-                                                                <Button className='mb-4 bg-[#255d7e] text-white' variant="outline" onClick={() => {handleIconClick(i)}}>Edit Details</Button>
-                                                                <Button className='mb-4 bg-[#255d7e] text-white' variant="outline" onClick={() => {handleChangePassword()}}>Change Password</Button>
-                                                                <Button className='mb-4 bg-[#255d7e] text-white' variant="outline" onClick={() => {handleChangeOtpNumber()}}>Change OTP Number</Button>
+                                                                <Button className='mb-4 bg-primary text-primary-foreground ' variant="outline" onClick={() => {handleIconClick(i)}}>Edit Details</Button>
+                                                                <Button className='mb-4 bg-primary text-primary-foreground ' variant="outline" onClick={() => {handleChangePassword()}}>Change Password</Button>
+                                                                <Button className='mb-4 bg-primary text-primary-foreground' variant="outline" onClick={() => {handleChangeOtpNumber()}}>Change OTP Number</Button>
                                                                 {contract.accessLevel === 'Administrator Access' && (
-                                                                    <Button className='mb-4 bg-[#ED1C28] text-white' variant="outline" onClick={() => {handleDeleteUser()}}>Delete User</Button>
+                                                                    <Button className='mb-4 bg-destructive hover:bg-destructive hover:text-primary-foreground text-primary-foreground' variant="outline" onClick={() => {handleDeleteUser()}}>Delete User</Button>
                                                                 )}
                                                             </div>
 
@@ -259,7 +285,7 @@ const UserProfiles: React.FC = () => {
                                                 <DialogTrigger asChild>
                                                     <button style={{ display: 'none' }}>Open</button>
                                                 </DialogTrigger>
-                                                <DialogContent style={{ backgroundColor: 'white' }}>
+                                                <DialogContent className='bg-primary-foreground'>
                                                     <DialogHeader>
                                                         <DialogTitle>Admin User profile - {contract?.contactDisplayName}</DialogTitle>
                                                         <DialogDescription>
@@ -339,28 +365,52 @@ const UserProfiles: React.FC = () => {
                                                                     <AccordionContent>
                                                                         <div className="network-provider-details mb-4">
                                                                             <div key={i} className="grid grid-cols-2 gap-4 py-2">
-                                                                                <Checkbox
-                                                                                    label="Email"
-                                                                                    name="Email"
-                                                                                    checked={contract.optInEmails}
-                                                                                />
-                                                                                <Checkbox
-                                                                                    label="SMS"
-                                                                                    name="SMS"
-                                                                                    checked={contract.optInSms}
-                                                                                />
+                                                                                <div className="flex gap-2 items-center">
+                                                                                    <Checkbox
+                                                                                        id="email"
+                                                                                        name="email"
+                                                                                        checked={contract.optInEmails}
+                                                                                        onCheckedChange={(checked) => console.log(checked)}
+                                                                                    />
+                                                                                    <label htmlFor="email">
+                                                                                        Email
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div className="flex gap-2 items-center">
+                                                                                    <Checkbox
+                                                                                        id="sms"
+                                                                                        name="sms"
+                                                                                        checked={contract.optInSms}
+                                                                                        onCheckedChange={(checked) => console.log(checked)}
+                                                                                    />
+                                                                                    <label htmlFor="sms">
+                                                                                        SMS
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
                                                                             <div key={i} className="grid grid-cols-2 gap-4 py-2 mb-5">
-                                                                                <Checkbox
-                                                                                    label="Call"
-                                                                                    name="Call"
-                                                                                    checked={contract.optInCalls}
-                                                                                />
-                                                                                <Checkbox
-                                                                                    label="WhatsApp"
-                                                                                    name="WhatsApp"
-                                                                                    checked={contract.optInWhatsApp}
-                                                                                />
+                                                                                <div className="flex gap-2 items-center">
+                                                                                    <Checkbox
+                                                                                        id="call"
+                                                                                        name="call"
+                                                                                        checked={contract.optInCalls}
+                                                                                        onCheckedChange={(checked) => console.log(checked)}
+                                                                                    />
+                                                                                    <label htmlFor="call">
+                                                                                        Call
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div className="flex gap-2 items-center">
+                                                                                    <Checkbox
+                                                                                        id="whatsApp"
+                                                                                        name="whatsApp"
+                                                                                        checked={contract.optInWhatsApp}
+                                                                                        onCheckedChange={(checked) => console.log(checked)}
+                                                                                    />
+                                                                                    <label htmlFor="whatsApp">
+                                                                                        Whatsapp
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
 
                                                                         </div>
@@ -404,7 +454,7 @@ const UserProfiles: React.FC = () => {
                                                 <DialogTrigger asChild>
                                                     <button style={{ display: 'none' }}>Open</button>
                                                 </DialogTrigger>
-                                                <DialogContent style={{ backgroundColor: 'white' }}>
+                                                <DialogContent className='bg-primary-foreground'>
                                                     <DialogHeader>
                                                         <DialogTitle>Edit User Profile Password - {contract?.contactDisplayName}</DialogTitle>
                                                         <DialogDescription>
@@ -507,7 +557,7 @@ const UserProfiles: React.FC = () => {
                                                 <DialogTrigger asChild>
                                                     <button style={{ display: 'none' }}>Open</button>
                                                 </DialogTrigger>
-                                                <DialogContent style={{ backgroundColor: 'white' }}>
+                                                <DialogContent className='bg-primary-foreground'>
                                                     <DialogHeader>
                                                         <DialogTitle className='mb-4'>Change One Time Pin - {contract?.contactDisplayName}</DialogTitle>
                                                         <DialogDescription className='mb-5'>
@@ -544,7 +594,7 @@ const UserProfiles: React.FC = () => {
                                                 <DialogTrigger asChild>
                                                     <button style={{ display: 'none' }}>Open</button>
                                                 </DialogTrigger>
-                                                <DialogContent style={{ backgroundColor: 'white' }}>
+                                                <DialogContent className='bg-primary-foreground'>
                                                     <DialogHeader className='mb-5'>
                                                         <DialogTitle className='mb-5'>Confirmation - {contract?.contactDisplayName}</DialogTitle>
                                                         <DialogDescription className='mb-5'>
@@ -569,7 +619,7 @@ const UserProfiles: React.FC = () => {
                                         <DialogTrigger asChild>
                                             <button style={{ display: 'none' }}>Open</button>
                                         </DialogTrigger>
-                                        <DialogContent style={{ backgroundColor: 'white', maxHeight: '80vh', overflowY: 'auto' }}>
+                                        <DialogContent className='bg-primary-foreground' style={{ maxHeight: '80vh', overflowY: 'auto' }}>
                                             <DialogHeader>
                                                 {/*<DialogTitle>{data?.dialogTitle} Settings - {data?.username}</DialogTitle>*/}
                                                 <DialogDescription>
@@ -756,26 +806,53 @@ const UserProfiles: React.FC = () => {
                                                             <AccordionContent>
                                                                 <div className="network-provider-details mb-4">
                                                                     <div key={i} className="grid grid-cols-2 gap-4 py-2">
-                                                                        <Checkbox
-                                                                            label="Email"
-                                                                            name="Email"
-                                                                        />
-                                                                        <Checkbox
-                                                                            label="SMS"
-                                                                            name="SMS"
-                                                                        />
+                                                                        <div className="flex gap-2 items-center">
+                                                                            <Checkbox
+                                                                                id="email"
+                                                                                name="email"
+                                                                                // checked={contract.optInEmails}
+                                                                                onCheckedChange={(checked) => console.log(checked)}
+                                                                            />
+                                                                            <label htmlFor="email">
+                                                                                Email
+                                                                            </label>
+                                                                        </div>
+                                                                        <div className="flex gap-2 items-center">
+                                                                            <Checkbox
+                                                                                id="sms"
+                                                                                name="sms"
+                                                                                // checked={contract.optInEmails}
+                                                                                onCheckedChange={(checked) => console.log(checked)}
+                                                                            />
+                                                                            <label htmlFor="sms">
+                                                                                SMS
+                                                                            </label>
+                                                                        </div>
                                                                     </div>
                                                                     <div key={i} className="grid grid-cols-2 gap-4 py-2 mb-5">
-                                                                        <Checkbox
-                                                                            label="Call"
-                                                                            name="Call"
-                                                                        />
-                                                                        <Checkbox
-                                                                            label="WhatsApp"
-                                                                            name="WhatsApp"
-                                                                        />
+                                                                        <div className="flex gap-2 items-center">
+                                                                            <Checkbox
+                                                                                id="call"
+                                                                                name="call"
+                                                                                // checked={contract.optInEmails}
+                                                                                onCheckedChange={(checked) => console.log(checked)}
+                                                                            />
+                                                                            <label htmlFor="call">
+                                                                                Call
+                                                                            </label>
+                                                                        </div>
+                                                                        <div className="flex gap-2 items-center">
+                                                                            <Checkbox
+                                                                                id="whatsApp"
+                                                                                name="whatsApp"
+                                                                                // checked={contract.optInEmails}
+                                                                                onCheckedChange={(checked) => console.log(checked)}
+                                                                            />
+                                                                            <label htmlFor="whatsApp">
+                                                                                Whatsapp
+                                                                            </label>
+                                                                        </div>
                                                                     </div>
-
                                                                 </div>
                                                                 <h3>Service Notifications</h3>
                                                                 <div className='mb-4'>

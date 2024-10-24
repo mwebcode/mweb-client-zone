@@ -30,6 +30,7 @@ import {
     PaginationLink, PaginationNext,
     PaginationPrevious
 } from "@/components/ui/pagination";
+import {Checkbox} from "@/components/ui/checkbox";
 
 
 interface DataTableProps<TData, TValue> {
@@ -118,18 +119,18 @@ export function DataTable<TData, TValue>({
         },
 
     });
-    const Checkbox = ({ label, name, checked, onChange }: any) => (
-        <label className="custom-checkbox flex">
-            <input
-                type="checkbox"
-                name={name}
-                checked={checked}
-                onChange={onChange}
-            />
-            <span className="checkmark"></span>
-            {label}
-        </label>
-    );
+    // const Checkbox = ({ label, name, checked, onChange }: any) => (
+    //     <label className="custom-checkbox flex">
+    //         <input
+    //             type="checkbox"
+    //             name={name}
+    //             checked={checked}
+    //             onChange={onChange}
+    //         />
+    //         <span className="checkmark"></span>
+    //         {label}
+    //     </label>
+    // );
     return (
         <div className="w-full max-w-[1024px] mx-auto items-center">
             <div className="table-container">
@@ -149,24 +150,45 @@ export function DataTable<TData, TValue>({
                 </div>
                 <div className="mb-8 grid grid-cols-1 sm:grid-cols-4 gap-4">
                     Status filter:
-                    <Checkbox
-                        label="Active"
-                        name="Active"
-                        checked={filters.Active}
-                        onChange={handleCheckboxChange}
-                    />
-                    <Checkbox
-                        label="Inactive"
-                        name="Inactive"
-                        checked={filters.Inactive}
-                        onChange={handleCheckboxChange}
-                    />
-                    <Checkbox
-                        label="Suspended"
-                        name="Suspended"
-                        checked={filters.Suspended}
-                        onChange={handleCheckboxChange}
-                    />
+                    {/*<Checkbox*/}
+                    {/*    label="Active"*/}
+                    {/*    name="Active"*/}
+                    {/*    checked={filters.Active}*/}
+                    {/*    onChange={handleCheckboxChange}*/}
+                    {/*/>*/}
+                    <div className="flex gap-2 items-center">
+                        <Checkbox
+                            id="active"
+                            name="active"
+                            checked={filters.Active}
+                            onChange={handleCheckboxChange}
+                        />
+                        <label htmlFor="active">
+                            Active
+                        </label>
+                    </div>
+                    <div className="flex gap-2 items-center">
+                        <Checkbox
+                            id="inactive"
+                            name="inactive"
+                            checked={filters.Active}
+                            onChange={handleCheckboxChange}
+                        />
+                        <label htmlFor="inactive">
+                            Inactive
+                        </label>
+                    </div>
+                    <div className="flex gap-2 items-center">
+                        <Checkbox
+                            id="suspended"
+                            name="suspended"
+                            checked={filters.Active}
+                            onChange={handleCheckboxChange}
+                        />
+                        <label htmlFor="suspended">
+                            Suspended
+                        </label>
+                    </div>
                 </div>
                 {/* Table for Larger Screens */}
                 <div className="hidden lg:block rounded-md border">
