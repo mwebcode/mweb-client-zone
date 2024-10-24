@@ -853,7 +853,6 @@ const UserProfiles: React.FC = () => {
                                                                             </label>
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
                                                                 <h3>Service Notifications</h3>
                                                                 <div className='mb-4'>
